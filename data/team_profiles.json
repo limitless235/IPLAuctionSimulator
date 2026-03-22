@@ -1,0 +1,65 @@
+{
+    "MI": {
+        "aggression": 0.8,
+        "price_tolerance": 0.6,
+        "star_bias": 0.9,
+        "youth_bias": 0.3,
+        "risk_aversion": 0.4
+    },
+    "CSK": {
+        "aggression": 0.5,
+        "price_tolerance": 0.8,
+        "star_bias": 0.4,
+        "youth_bias": 0.1,
+        "risk_aversion": 0.8
+    },
+    "RCB": {
+        "aggression": 0.9,
+        "price_tolerance": 0.9,
+        "star_bias": 1.0,
+        "youth_bias": 0.2,
+        "risk_aversion": 0.2
+    },
+    "KKR": {
+        "aggression": 0.7,
+        "price_tolerance": 0.5,
+        "star_bias": 0.6,
+        "youth_bias": 0.7,
+        "risk_aversion": 0.5
+    },
+    "DC": {
+        "aggression": 0.6,
+        "price_tolerance": 0.6,
+        "star_bias": 0.5,
+        "youth_bias": 0.8,
+        "risk_aversion": 0.6
+    },
+    "PBKS": {
+        "aggression": 0.8,
+        "price_tolerance": 0.7,
+        "star_bias": 0.6,
+        "youth_bias": 0.5,
+        "risk_aversion": 0.3
+    },
+    "RR": {
+        "aggression": 0.4,
+        "price_tolerance": 0.4,
+        "star_bias": 0.3,
+        "youth_bias": 0.9,
+        "risk_aversion": 0.7
+    },
+    "SRH": {
+        "aggression": 0.6,
+        "price_tolerance": 0.7,
+        "star_bias": 0.5,
+        "youth_bias": 0.6,
+        "risk_aversion": 0.5
+    },
+    "GT": {
+        "aggression": 0.5,
+        "price_tolerance": 0.6,
+        "star_bias": 0.4,
+        "youth_bias": 0.5,
+        "risk_aversion": 0.6
+    }
+}

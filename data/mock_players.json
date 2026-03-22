@@ -1,0 +1,146 @@
+[
+    {
+        "id": "p1",
+        "name": "Virat Kohli",
+        "role": "batter",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p2",
+        "name": "Jasprit Bumrah",
+        "role": "bowler",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p3",
+        "name": "Yashasvi Jaiswal",
+        "role": "batter",
+        "base_price": 10000000,
+        "is_star": false,
+        "is_youth": true
+    },
+    {
+        "id": "p4",
+        "name": "Hardik Pandya",
+        "role": "all_rounder",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p5",
+        "name": "Rishabh Pant",
+        "role": "wicket_keeper",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p6",
+        "name": "Ravi Bishnoi",
+        "role": "bowler",
+        "base_price": 10000000,
+        "is_star": false,
+        "is_youth": true
+    },
+    {
+        "id": "p7",
+        "name": "MS Dhoni",
+        "role": "wicket_keeper",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p8",
+        "name": "Mayank Yadav",
+        "role": "bowler",
+        "base_price": 5000000,
+        "is_star": false,
+        "is_youth": true
+    },
+    {
+        "id": "p9",
+        "name": "Suryakumar Yadav",
+        "role": "batter",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p10",
+        "name": "Ravindra Jadeja",
+        "role": "all_rounder",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p11",
+        "name": "Rinku Singh",
+        "role": "batter",
+        "base_price": 15000000,
+        "is_star": false,
+        "is_youth": false
+    },
+    {
+        "id": "p12",
+        "name": "Mohammed Shami",
+        "role": "bowler",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p13",
+        "name": "Shubman Gill",
+        "role": "batter",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": true
+    },
+    {
+        "id": "p14",
+        "name": "Sanju Samson",
+        "role": "wicket_keeper",
+        "base_price": 15000000,
+        "is_star": false,
+        "is_youth": false
+    },
+    {
+        "id": "p15",
+        "name": "Axar Patel",
+        "role": "all_rounder",
+        "base_price": 15000000,
+        "is_star": false,
+        "is_youth": false
+    },
+    {
+        "id": "p16",
+        "name": "Rashid Khan",
+        "role": "bowler",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p17",
+        "name": "Heinrich Klaasen",
+        "role": "wicket_keeper",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    },
+    {
+        "id": "p18",
+        "name": "Travis Head",
+        "role": "batter",
+        "base_price": 20000000,
+        "is_star": true,
+        "is_youth": false
+    }
+]
