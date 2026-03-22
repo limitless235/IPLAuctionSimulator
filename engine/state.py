@@ -58,5 +58,6 @@ class AuctionState(BaseModel):
     teams: Dict[str, Team] = Field(default_factory=dict)
     unsold_players: List[Player] = Field(default_factory=list)
     sold_players: List[Player] = Field(default_factory=list)
+    truly_unsold_players: List[Player] = Field(default_factory=list)
     
     is_auction_complete: bool = False

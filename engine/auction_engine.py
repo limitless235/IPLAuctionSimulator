@@ -110,7 +110,8 @@ class AuctionEngine:
         else:
             # Re-queue randomly or just leave as unsold? For now, we put them at end of unsold or discard.
             # Usually they go to unsold list.
-            pass # Kept out of unsold_players list so they aren't immediately drawn again
+            self.state.truly_unsold_players.append(player)
+ # Kept out of unsold_players list so they aren't immediately drawn again
 
         # Check end condition
         # Simulation priority logic: all players processed or all squads full
