@@ -62,7 +62,7 @@ class ValuationFilter:
 
         # Hard cap at price_tolerance * remaining_budget
         # Cap at 30% of total budget for any single player
-        max_price = min(max_price, int(self.team.total_budget * 0.28 * self.personality["price_tolerance"]))
+        max_price = min(max_price, int(self.team.total_budget * 0.29 * self.personality["price_tolerance"]))
 
         return max_price
 
