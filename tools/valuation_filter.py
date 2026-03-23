@@ -9,33 +9,36 @@ class ValuationFilter:
         self.scarcity_index = scarcity_index
 
     def calculate_max_price(self) -> int:
-        """Heuristic calculation for the maximum price a team should theoretically pay."""
-        # Base valuation from player stats
-        base_val = self.player.base_price
-        
-        # Star adjustments
+    # Market base: star players start at 10 Cr, others at 3 Cr
         if self.player.is_star:
-            base_val += int(self.personality["star_bias"] * 50000000)
-            
-        # Youth adjustments
-        if self.player.is_youth:
-            base_val += int(self.personality["youth_bias"] * 20000000)
+            base_val = 100000000  # 10 Cr
+        elif self.player.is_youth:
+            base_val = 40000000   # 4 Cr
+        else:
+            base_val = 30000000   # 3 Cr
 
-        # Scarcity adjustments: If scarce, inflate price willingness
+        # Star bias adjustment
+        if self.player.is_star:
+            base_val += int(self.personality["star_bias"] * 100000000)  # up to 10 Cr more
+
+        # Youth bias adjustment
+        if self.player.is_youth:
+            base_val += int(self.personality["youth_bias"] * 30000000)  # up to 3 Cr more
+
+        # Scarcity adjustment
         if self.scarcity_index < 0.3:
-            base_val = int(base_val * 1.2)  # 20% increase
-            
-        # Squad Need adjustments
+            base_val = int(base_val * 1.2)
+
+        # Squad need adjustment
         squad_need_score = self._get_squad_need_score()
         if squad_need_score > 0.8:
-             base_val = int(base_val * 1.5)  # 50% increase for critical need
-             
-        # Aggression and Price tolerance cap
+            base_val = int(base_val * 1.5)
+
+        # Aggression and price tolerance cap
         max_price = int(base_val * (1 + (self.personality["aggression"] * 0.5)))
         max_price = min(max_price, int(self.team.remaining_budget * self.personality["price_tolerance"]))
-        
         return max_price
-
+        
     def _get_squad_need_score(self) -> float:
         """Returns 0.0 to 1.0 indicating how badly the squad needs this player's role."""
         role_count = self.team.roles_count.get(self.player.role, 0)
