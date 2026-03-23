@@ -36,17 +36,7 @@ class AuctionOrchestrator:
             current_bid = state.current_bid
             bidding_rounds = state.bidding_rounds
 
-            if bidding_rounds >= 50:
-                print(f"[LIMIT EXCEEDED] Max rounds reached for {player.name}. Forcing sale.")
-                self.engine.state.active_bidders = (
-                    [state.highest_bidder] if state.highest_bidder else []
-                )
-                self.engine.next_player()
-                self.memory.update_scarcity_index(
-                    self.engine.state.unsold_players,
-                    self.engine.state.unsold_players + self.engine.state.sold_players
-                )
-                continue
+            
 
             active = list(state.active_bidders)
 
