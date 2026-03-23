@@ -13,7 +13,7 @@ class LocalLLMClient(BaseLLMClient):
     Client for interacting with local LLMs via endpoints like Ollama.
     Expects an endpoint supporting the `/api/generate` schema.
     """
-    def __init__(self, endpoint: str, model: str, temperature: float = 0.2, max_tokens: int = 256):
+    def __init__(self, endpoint: str, model: str, temperature: float = 0.0, max_tokens: int = 32):
         self.endpoint = endpoint
         self.model = model
         self.temperature = temperature
@@ -33,7 +33,7 @@ class LocalLLMClient(BaseLLMClient):
         }
         
         try:
-            response = requests.post(self.endpoint, json=payload, timeout=30)
+            response = requests.post(self.endpoint, json=payload,timeout=20)
             response.raise_for_status()
             response_data = response.json()
             # The `/api/generate` endpoint typically returns `response` field

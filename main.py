@@ -19,9 +19,9 @@ def load_llm_config(path: str = "config/llm.yaml"):
         return {
             "provider": "local",
             "endpoint": "http://localhost:11434/api/generate",
-            "model": "mistral",
+            "model": "llama3",
             "temperature": 0.2,
-            "max_tokens": 120
+            "max_tokens": 256
         }
 
 def main():
@@ -45,8 +45,7 @@ def main():
         unsold_players = [Player(**p) for p in mock_players_data]
 
     # 2. Init State & Teams
-    initial_state = AuctionState()
-    initial_state.unsold_players = unsold_players
+    initial_state = AuctionState(unsold_players=unsold_players)
     
     team_agents = {}
     for t_id, t_prof in memory.team_profiles.items():

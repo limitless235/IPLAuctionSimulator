@@ -1,7 +1,33 @@
 import json
 from typing import Dict, Any, Tuple
 from .state import AuctionState, ActionResponse, BidAction, Player, Team
-MAX_BIDDING_ROUNDS = 25
+MAX_BIDDING_ROUNDS = 60
+
+def get_next_bid(current_bid: int) -> int:
+    """
+    Returns the next valid bid amount following official IPL auction increment rules.
+    All amounts are in INR (Indian Rupees).
+    Ladder:
+    - current_bid < 10000000 (1 Cr): increment by 500000 (5L)
+    - 10000000 <= current_bid < 20000000 (1-2 Cr): increment by 1000000 (10L)
+    - 20000000 <= current_bid < 50000000 (2-5 Cr): increment by 2000000 (20L)
+    - 50000000 <= current_bid < 100000000 (5-10 Cr): increment by 2500000 (25L)
+    - 100000000 <= current_bid < 200000000 (10-20 Cr): increment by 5000000 (50L)
+    - current_bid >= 200000000 (20 Cr+): increment by 10000000 (1 Cr)
+    """
+    if current_bid < 10000000:
+        return current_bid + 500000
+    elif current_bid < 20000000:
+        return current_bid + 1000000
+    elif current_bid < 50000000:
+        return current_bid + 2000000
+    elif current_bid < 100000000:
+        return current_bid + 2500000
+    elif current_bid < 200000000:
+        return current_bid + 5000000
+    else:
+        return current_bid + 10000000
+
 class AuctionEngine:
     def __init__(self, initial_state: AuctionState):
         self.state = initial_state
@@ -54,7 +80,7 @@ class AuctionEngine:
             return self._handle_pass(action.team_id)
 
         if action.action_type == "BID":
-            return self._handle_bid(action.team_id, action.bid_amount)
+            return self._handle_bid(action.team_id)
             
         return self._format_response("ERROR", f"Unsupported action_type: {action.action_type}")
 
@@ -63,36 +89,23 @@ class AuctionEngine:
             self.state.active_bidders.remove(team_id)
         return self._format_response("OK")
 
-    def _handle_bid(self, team_id: str, bid_amount: int) -> str:
+    def _handle_bid(self, team_id: str) -> str:
         team = self.state.teams[team_id]
-        
+
         if team_id not in self.state.active_bidders:
-            return self._format_response("ERROR", "Team is not an active bidder for this player.")
+            return self._format_response("ERROR", "Team is not an active bidder.")
 
-        if bid_amount is None:
-            return self._format_response("ERROR", "Bid amount is required for BID action.")
+        next_bid = get_next_bid(self.state.current_bid)
 
-        # Validation rules
-        if bid_amount <= self.state.current_bid and self.state.highest_bidder is not None:
-             return self._format_response("ERROR", f"Bid must be strictly greater than current bid {self.state.current_bid}")
-             
-        if self.state.highest_bidder is None and bid_amount < self.state.current_bid:
-             return self._format_response("ERROR", f"First bid must be >= base price {self.state.current_bid}")
-
-        if bid_amount > team.remaining_budget:
-             return self._format_response("ERROR", "Bid exceeds remaining team budget.")
+        if next_bid > team.remaining_budget:
+            return self._format_response("ERROR", "Next bid increment exceeds remaining budget.")
 
         if team.squad_size >= team.max_squad_size:
-             return self._format_response("ERROR", "Team squad is already full.")
+            return self._format_response("ERROR", "Team squad is already full.")
 
-        # Accept bid
         self.state.highest_bidder = team_id
-        self.state.current_bid = bid_amount
+        self.state.current_bid = next_bid
         self.state.bidding_rounds += 1
-        if self.state.bidding_rounds >= MAX_BIDDING_ROUNDS:
-        # Force sale to current highest bidder by clearing active bidders
-            self.state.active_bidders = []
-
         return self._format_response("OK")
 
     def next_player(self) -> str:

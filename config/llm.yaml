@@ -1,5 +1,5 @@
 provider: local
 endpoint: http://localhost:11434/api/generate
-model: llama3
-temperature: 0.2
-max_tokens: 256
+model: llama3:8b
+temperature: 0.0
+max_tokens: 32
