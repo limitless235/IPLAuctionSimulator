@@ -12,7 +12,17 @@ class Player(BaseModel):
     base_price: int
     is_star: bool = False
     is_youth: bool = False
-    
+    age: int = 25
+    nationality: Literal["indian", "overseas"] = "indian"
+    tier: int = 3
+    brand_value: float = 0.0
+    recent_form: float = 0.5
+    ipl_experience: int = 0
+    specialist_tag: str = ""
+    pace_bowler: bool = False
+    spin_bowler: bool = False
+
+
 class Team(BaseModel):
     id: str
     name: str
@@ -32,6 +42,15 @@ class Team(BaseModel):
     # Roster mapping player_id -> purchase_price
     squad: Dict[str, int] = Field(default_factory=dict)
 
+    # NEW FIELD
+    overseas_slots_used: int = 0
+
+    # NEW PROPERTY
+    @property
+    def overseas_slots_remaining(self) -> int:
+        return 4 - self.overseas_slots_used
+
+
 # ---------------------------------------------------------
 # AUCTION STATE & ACTIONS
 # ---------------------------------------------------------
@@ -44,6 +63,7 @@ class BidAction(BaseModel):
 class ActionResponse(BaseModel):
     status: Literal["OK", "ERROR"]
     error_msg: Optional[str] = None
+
 
 class AuctionState(BaseModel):
     current_player: Optional[Player] = None

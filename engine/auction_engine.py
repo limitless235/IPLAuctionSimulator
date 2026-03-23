@@ -1,6 +1,7 @@
 import json
 from typing import Dict, Any, Tuple
 from .state import AuctionState, ActionResponse, BidAction, Player, Team
+
 MAX_BIDDING_ROUNDS = 60
 
 def get_next_bid(current_bid: int) -> int:
@@ -103,6 +104,14 @@ class AuctionEngine:
         if team.squad_size >= team.max_squad_size:
             return self._format_response("ERROR", "Team squad is already full.")
 
+        # >>> CHANGE 1: Overseas slot enforcement
+        player = self.state.current_player
+        if player.nationality == "overseas":
+            if team.overseas_slots_used >= 4:
+                return self._format_response("ERROR",
+                    "Team has no overseas slots remaining.")
+        # <<< CHANGE 1
+
         self.state.highest_bidder = team_id
         self.state.current_bid = next_bid
         self.state.bidding_rounds += 1
@@ -123,15 +132,17 @@ class AuctionEngine:
             winning_team.squad[player.id] = self.state.current_bid
             winning_team.squad_size += 1
             winning_team.roles_count[player.role] += 1
+
+            # >>> CHANGE 2: Track overseas slots
+            if player.nationality == "overseas":
+                winning_team.overseas_slots_used += 1
+            # <<< CHANGE 2
+
             self.state.sold_players.append(player)
         else:
-            # Re-queue randomly or just leave as unsold? For now, we put them at end of unsold or discard.
-            # Usually they go to unsold list.
             self.state.truly_unsold_players.append(player)
- # Kept out of unsold_players list so they aren't immediately drawn again
 
         # Check end condition
-        # Simulation priority logic: all players processed or all squads full
         all_squads_full = all(t.squad_size >= t.max_squad_size for t in self.state.teams.values())
         if not self.state.unsold_players or all_squads_full:
             self.state.current_player = None
@@ -159,9 +170,6 @@ class AuctionEngine:
     def _format_response(self, status: str, error_msg: str = None) -> str:
         resp = ActionResponse(status=status, error_msg=error_msg)
         
-        # Dump state manually so we comply with 'Returns structured JSON only'
-        # To keep payload compact for LLM context, we will output summarized state later, 
-        # but the engine tool itself responds with standard JSON.
         data = {
             "status": resp.status,
             "error_msg": resp.error_msg,
