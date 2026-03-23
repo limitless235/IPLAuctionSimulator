@@ -1,72 +1,70 @@
 import json
+import random
+from typing import List
+
 from engine.state import AuctionState, Player, Team
 from engine.auction_engine import AuctionEngine
-from store.memory import MemoryStore
-from agents.team_agent import TeamAgent
+from agents.team_agent import TeamAgent, AgentDecision
+from agents.llm_client import BaseLLMClient
 from agents.orchestrator import AuctionOrchestrator
+from store.memory import MemoryStore
 
-class MockMessage:
-    def __init__(self, content):
-        self.content = content
 
-class MockChoice:
-    def __init__(self, content):
-        self.message = MockMessage(content)
+class MockClient(BaseLLMClient):
+    """Mock LLM client for deterministic testing without network calls."""
 
-class MockResponse:
-    def __init__(self, content):
-        self.choices = [MockChoice(content)]
+    def generate_json(self, prompt: str) -> str:
+        """Generate mock JSON response based on random decision."""
+        if random.random() < 0.6:
+            bid_amount = random.randint(20000000, 50000000)
+            return json.dumps({"decision": "BID", "bid_amount": bid_amount})
+        else:
+            return json.dumps({"decision": "PASS", "bid_amount": None})
 
-class MockChatCompletions:
-    def create(self, **kwargs):
-        # Find current bid from prompt to bid legally higher
-        prompt = kwargs.get("messages", [{}])[0].get("content", "")
-        current_bid_line = [m for m in prompt.split('\n') if "Current bid:" in m]
-        if current_bid_line:
-            current_bid = int(current_bid_line[0].split(":")[1].strip())
-            return MockResponse(json.dumps({"decision": "BID", "bid_amount": current_bid + 500000}))
-        return MockResponse(json.dumps({"decision": "PASS", "bid_amount": None}))
 
-class MockChat:
-    def __init__(self):
-        self.completions = MockChatCompletions()
+def build_mock_state() -> AuctionState:
+    """Build a mock auction state with 60 players and 9 teams."""
+    team_ids = ["MI", "CSK", "RCB", "KKR", "DC", "PBKS", "RR", "SRH", "GT"]
+    teams = {}
+    for team_id in team_ids:
+        teams[team_id] = Team(
+            id=team_id,
+            name=team_id,
+            remaining_budget=1000000000,
+            squad={},
+        )
+    players = [Player(**p) for p in json.load(open("data/mock_players.json"))]
+    return AuctionState(unsold_players=players, teams=teams)
+def build_agents(state: AuctionState, client: MockClient) -> dict:
+    agents = {}
+    for team_id in state.teams.keys():
+        agents[team_id] = TeamAgent(
+            team=state.teams[team_id],
+            personality = {
+    "aggression": 0.7,
+    "risk_aversion": 0.3,
+    "star_bias": 0.8,
+    "role_need": 0.5,
+    "price_tolerance": 0.8,
+    "youth_bias": 0.5
+},
+            client=client
+        )
+    return agents
 
-class MockClient:
-    def __init__(self, api_key=None):
-        self.chat = MockChat()
-
-def test_mock_auction():
-    client = MockClient()
-    memory = MemoryStore("data/team_profiles.json")
-    
-    with open("data/mock_players.json", "r") as f:
-        mock_players_data = json.load(f)
-        unsold_players = [Player(**p) for p in mock_players_data[:3]]
-
-    initial_state = AuctionState()
-    initial_state.unsold_players = unsold_players
-    
-    team_agents = {}
-    for t_id, t_prof in memory.team_profiles.items():
-        team = Team(id=t_id, name=f"{t_id} Franchise")
-        initial_state.teams[t_id] = team
-        team_agents[t_id] = TeamAgent(team=team, personality=t_prof, client=client)
-
-    engine = AuctionEngine(initial_state)
-    orchestrator = AuctionOrchestrator(
-        engine=engine,
-        team_agents=team_agents,
-        human_team_id=None,
-        memory=memory
-    )
-
-    print("Running Mock Auction Engine Test...")
-    orchestrator.run_auction(test_mode=True)
-    
-    final_state = engine.get_state()
-    print("\n\n======== FINAL MOCK SQUADS ========")
-    for t_id, t in final_state.teams.items():
-        print(f"{t_id}: Spent {t.total_budget - t.remaining_budget} on {t.squad_size} players.")
 
 if __name__ == "__main__":
-    test_mock_auction()
+    print("Running Mock Auction Engine Test...")
+
+    state = build_mock_state()
+    client = MockClient()
+    memory = MemoryStore()
+    agents = build_agents(state, client)
+    orchestrator = AuctionOrchestrator(engine=AuctionEngine(state), team_agents=agents, memory=memory)
+    print("Starting IPL Auction Simulator...")
+    orchestrator.run_auction(test_mode=True)
+
+    print("\n======== FINAL MOCK SQUADS =========")
+    for team_id, team in state.teams.items():
+        spent = 1000000000 - team.remaining_budget
+        print(f"{team_id}: Spent {spent} on {len(team.squad)} players.")

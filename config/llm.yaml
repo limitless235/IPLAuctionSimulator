@@ -1,5 +1,5 @@
 provider: local
 endpoint: http://localhost:11434/api/generate
-model: mistral
+model: llama3
 temperature: 0.2
-max_tokens: 120
+max_tokens: 256

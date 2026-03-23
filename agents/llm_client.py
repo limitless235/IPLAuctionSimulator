@@ -13,7 +13,7 @@ class LocalLLMClient(BaseLLMClient):
     Client for interacting with local LLMs via endpoints like Ollama.
     Expects an endpoint supporting the `/api/generate` schema.
     """
-    def __init__(self, endpoint: str, model: str, temperature: float = 0.2, max_tokens: int = 120):
+    def __init__(self, endpoint: str, model: str, temperature: float = 0.2, max_tokens: int = 256):
         self.endpoint = endpoint
         self.model = model
         self.temperature = temperature
