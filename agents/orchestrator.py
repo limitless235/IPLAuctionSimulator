@@ -30,6 +30,8 @@ class AuctionOrchestrator:
 
             if not state.current_player:
                 self.engine.next_player()
+                from backend.main import send_state_snapshot
+                send_state_snapshot()
                 continue
 
             player = state.current_player
@@ -42,6 +44,14 @@ class AuctionOrchestrator:
 
             if len(active) == 0:
                 print(f"[SOLD/UNSOLD] Resolving {player.name}...")
+                if not state.highest_bidder:
+                    from backend.main import sync_broadcast
+                    sync_broadcast({
+                        "type": "player_unsold",
+                        "player": player.name,
+                        "text": f"{player.name} went UNSOLD",
+                        "event_type": "unsold"
+                    })
                 self.engine.next_player()
                 self.memory.update_scarcity_index(
                     self.engine.state.unsold_players,
@@ -51,6 +61,15 @@ class AuctionOrchestrator:
 
             if len(active) == 1 and state.highest_bidder == active[0]:
                 print(f"[SOLD] {player.name} sold to {state.highest_bidder} for {current_bid}.")
+                from backend.main import sync_broadcast
+                sync_broadcast({
+                    "type": "player_sold",
+                    "player": player.name,
+                    "team": state.highest_bidder,
+                    "price": round(current_bid / 100000),
+                    "text": f"{player.name} SOLD to {state.highest_bidder} for ₹{round(current_bid / 100000)}L",
+                    "event_type": "sold"
+                })
                 self.engine.next_player()
                 self.memory.update_scarcity_index(
                     self.engine.state.unsold_players,
@@ -98,7 +117,14 @@ class AuctionOrchestrator:
                 self._log_test(test_mode, f"{current_team_id} Calling LLM...", "")
                 total_players = len(self.engine.state.unsold_players) + len(self.engine.state.sold_players) + len(self.engine.state.truly_unsold_players)
                 auction_progress = len(self.engine.state.sold_players) / max(total_players, 1)
-                decision = agent.make_decision(player, state.current_bid, scarcity, auction_progress)
+                decision = agent.make_decision(
+                    player, 
+                    state.current_bid, 
+                    scarcity, 
+                    auction_progress,
+                    active_bidders=active,
+                    rivalry_memory=self.memory.rivalry_memory
+                )
                 self._log_test(test_mode, f"LLM Decision {current_team_id}", str(decision))
                 self._apply_and_retry(current_team_id, decision.decision, test_mode)
 
@@ -107,9 +133,25 @@ class AuctionOrchestrator:
             "action_type": decision,
             "team_id": team_id,
         }
+        current_bid_before = self.engine.state.current_bid
         resp_json = self.engine.apply_action(action_payload)
         resp = json.loads(resp_json)
-        if resp["status"] == "ERROR":
+        
+        if resp["status"] == "OK" and decision.upper() == "BID":
+            from backend.main import sync_broadcast, auction_state
+            player = self.engine.state.current_player
+            new_bid = self.engine.state.current_bid
+            sync_broadcast({
+                "type": "bid_placed",
+                "player": player.name,
+                "team": team_id,
+                "amount": round(new_bid / 100000),
+                "text": f"{team_id} bids ₹{round(new_bid / 100000)}L on {player.name}",
+                "event_type": "bid",
+                "human_action_pending": auction_state.get("human_action_pending", False)
+            })
+            
+        elif resp["status"] == "ERROR":
             self._log_test(test_mode, f"[ERROR] Engine rejected {team_id}", resp["error_msg"])
             self.engine.apply_action({"action_type": "PASS", "team_id": team_id})
 

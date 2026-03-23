@@ -13,20 +13,28 @@ class HumanAgent:
     def make_decision(self, player: Player, current_bid: int,
                       next_bid: int, remaining_budget: int,
                       squad_size: int) -> HumanDecision:
-        print(f"\n{'='*50}")
-        print(f"[YOUR TURN — {self.team_id}]")
-        print(f"Player:          {player.name}")
-        print(f"Role:            {player.role}")
-        print(f"Nationality:     {player.nationality}")
-        print(f"Tier:            {player.tier} | Star: {player.is_star} | Form: {player.recent_form}")
-        print(f"Current bid:     {current_bid / 10000000:.1f} Cr")
-        print(f"Next bid:        {next_bid / 10000000:.1f} Cr")
-        print(f"Your budget:     {remaining_budget / 10000000:.1f} Cr remaining")
-        print(f"Your squad:      {squad_size} players")
-        print(f"{'='*50}")
-
-        while True:
-            choice = input("Enter BID or PASS: ").strip().upper()
-            if choice in ("BID", "PASS"):
-                return HumanDecision(decision=choice)
-            print("Invalid input. Enter BID or PASS.")
+        
+        import backend.main as main_module
+        
+        # Tell frontend we need an action
+        main_module.auction_state["human_action_pending"] = True
+        
+        # To make sure frontend sees the state change, send a full snapshot
+        # or the explicitly expected human_decision_needed event
+        main_module.sync_broadcast({
+            "type": "human_decision_needed", 
+            "player": {"name": player.name, "role": main_module.ROLE_MAP.get(player.role, "BAT"), "base_price": round(player.base_price / 100000)}, 
+            "current_bid": round(current_bid / 100000)
+        })
+        
+        # Send a state snapshot so UI correctly interprets the human_action_pending property
+        main_module.send_state_snapshot()
+        
+        # Wait for the user to click a button
+        main_module.human_action_event.wait()
+        
+        action_val = main_module.human_action_value["action"].upper()
+        # if amount is custom, we might want to override, but the orchestration logic 
+        # normally handles BID vs PASS logic cleanly.
+        
+        return HumanDecision(decision=action_val)

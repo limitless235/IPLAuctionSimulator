@@ -11,16 +11,17 @@ function useWebSocket(onMessage) {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
+    let isIntentionalClose = false;
     const connect = () => {
       const ws = new WebSocket(WS_URL);
       wsRef.current = ws;
       ws.onopen = () => setConnected(true);
-      ws.onclose = () => { setConnected(false); setTimeout(connect, 2000); };
+      ws.onclose = () => { setConnected(false); if (!isIntentionalClose) setTimeout(connect, 2000); };
       ws.onmessage = (e) => onMessage(JSON.parse(e.data));
     };
     connect();
-    return () => wsRef.current?.close();
-  }, []);
+    return () => { isIntentionalClose = true; wsRef.current?.close(); };
+  }, [onMessage]);
 
   return connected;
 }
@@ -52,13 +53,13 @@ function BudgetBar({ remaining, total }) {
   );
 }
 
-function TeamCard({ team, isHuman, isHighBidder }) {
+function TeamCard({ team, isHuman, isHighBidder, isSelected, onClick }) {
   return (
-    <div style={{
-      background: isHuman ? "rgba(99,102,241,0.12)" : "rgba(255,255,255,0.04)",
-      border: `1px solid ${isHighBidder ? "#f59e0b" : isHuman ? "#6366f1" : "rgba(255,255,255,0.08)"}`,
+    <div onClick={onClick} style={{
+      background: isSelected ? "rgba(255,255,255,0.1)" : isHuman ? "rgba(99,102,241,0.12)" : "rgba(255,255,255,0.04)",
+      border: `1px solid ${isSelected ? "#fff" : isHighBidder ? "#f59e0b" : isHuman ? "#6366f1" : "rgba(255,255,255,0.08)"}`,
       borderRadius: 10, padding: "10px 12px", position: "relative",
-      transition: "border-color 0.3s", cursor: "default"
+      transition: "all 0.2s", cursor: "pointer"
     }}>
       {isHighBidder && (
         <div style={{
@@ -263,6 +264,7 @@ export default function App() {
   const [summary, setSummary] = useState(null);
   const [tab, setTab] = useState("live");  // live | teams | queue | summary
   const [humanTeam, setHumanTeam] = useState("");
+  const [selectedTeam, setSelectedTeam] = useState("");
   const [setupMode, setSetupMode] = useState(true);
   const feedRef = useRef(null);
 
@@ -274,7 +276,7 @@ export default function App() {
       setSetupMode(false);
     } else if (msg.type === "bid_placed" || msg.type === "player_sold") {
       setState(prev => ({ ...prev, auction: { ...prev?.auction, ...msg } }));
-      setFeed(prev => [{ time: new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }), text: msg.text, type: msg.event_type }, ...prev].slice(0, 80));
+      setFeed(prev => [{ time: new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }), text: msg.text, type: msg.event_type }, ...prev].slice(0, 10));
     }
   }, []);
 
@@ -319,6 +321,8 @@ export default function App() {
     { id: "queue", label: "📋 Queue" },
     { id: "summary", label: "📊 Summary" },
   ];
+  
+  const activeTeamForSquad = selectedTeam || auction.human_team;
 
   return (
     <div style={{
@@ -444,7 +448,7 @@ export default function App() {
                   color: tab === t.id ? "#a5b4fc" : "#64748b",
                   fontSize: 13, fontWeight: tab === t.id ? 700 : 400, cursor: "pointer",
                   transition: "color 0.2s"
-                }}>{t.label}</button>
+                }}>{t.id === "queue" && status === "finished" ? "Unsold" : t.label}</button>
               ))}
             </div>
 
@@ -459,16 +463,18 @@ export default function App() {
                         key={t.name} team={t}
                         isHuman={t.name === auction.human_team}
                         isHighBidder={t.name === auction.current_bid_team}
+                        isSelected={t.name === activeTeamForSquad}
+                        onClick={() => setSelectedTeam(t.name)}
                       />
                     ))}
                   </div>
 
-                  {/* Expanded squad for human team */}
-                  {auction.human_team && (
+                  {/* Expanded squad for active team */}
+                  {activeTeamForSquad && (
                     <div style={{ marginTop: 28 }}>
-                      <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 600, letterSpacing: "0.07em", marginBottom: 12 }}>YOUR SQUAD — {auction.human_team}</div>
-                      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                        {(teams.find(t => t.name === auction.human_team)?.players || []).map((p, i) => (
+                      <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 600, letterSpacing: "0.07em", marginBottom: 12 }}>SQUAD — {activeTeamForSquad}</div>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 8 }}>
+                        {(teams.find(t => t.name === activeTeamForSquad)?.players || []).map((p, i) => (
                           <div key={i} style={{
                             display: "flex", alignItems: "center", gap: 12,
                             background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.15)",
@@ -488,7 +494,9 @@ export default function App() {
               {/* Queue tab */}
               {tab === "queue" && (
                 <div>
-                  <div style={{ fontSize: 12, color: "#475569", marginBottom: 14 }}>{remaining.length} players remaining in auction</div>
+                  <div style={{ fontSize: 12, color: "#475569", marginBottom: 14 }}>
+                    {remaining.length} {status === "finished" ? "unsold players" : "players remaining in auction"}
+                  </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                     {remaining.map((p, i) => (
                       <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>

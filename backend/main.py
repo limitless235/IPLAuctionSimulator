@@ -3,7 +3,10 @@ IPL Auction Simulator — FastAPI Backend
 Drop this file into your IPLAuctionSimulator/ root.
 Run with: uvicorn backend.main:app --reload --port 8000
 """
-
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+from engine.state import AuctionState
+from engine.auction_engine import AuctionEngine
 import asyncio
 import json
 import threading
@@ -11,6 +14,11 @@ from typing import Optional
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+from store.memory import MemoryStore
+from engine.state import AuctionState, Player, Team
+from agents.team_agent import TeamAgent
+from agents.orchestrator import AuctionOrchestrator
 
 app = FastAPI(title="IPL Auction Simulator API")
 
@@ -33,10 +41,34 @@ auction_state = {
     "human_action_pending": False,
 }
 
+_auction_state: Optional[AuctionState] = None
+
+ROLE_MAP = {"batter": "BAT", "bowler": "BOWL", "all_rounder": "ALL", "wicket_keeper": "WK"}
+
 connected_clients: list[WebSocket] = []
-human_action_event = asyncio.Event()
+human_action_event = threading.Event()
 human_action_value: Optional[dict] = None
 
+_main_loop = None
+
+@app.on_event("startup")
+async def on_startup():
+    global _main_loop
+    _main_loop = asyncio.get_running_loop()
+
+def sync_broadcast(payload: dict):
+    if _main_loop and _main_loop.is_running():
+        asyncio.run_coroutine_threadsafe(broadcast(payload), _main_loop)
+    else:
+        asyncio.run(broadcast(payload))
+
+def send_state_snapshot():
+    """Forces the frontend to do a hard refresh of the state (current_player, human_team, etc)."""
+    if _main_loop and _main_loop.is_running():
+        async def _send():
+            snap = await get_full_state()
+            await broadcast({"type": "state_snapshot", "data": snap})
+        asyncio.run_coroutine_threadsafe(_send(), _main_loop)
 
 # ── WebSocket broadcast helper ────────────────────────────────────────────────
 async def broadcast(payload: dict):
@@ -71,21 +103,61 @@ class StartRequest(BaseModel):
 
 @app.post("/auction/start")
 async def start_auction(req: StartRequest):
-    """
-    Wire this to your Orchestrator.run() in a background thread.
-    Replace the stub below with:
-        from agents.orchestrator import Orchestrator
-        ...
-    """
+    global _auction_state
     if auction_state["status"] == "running":
         raise HTTPException(400, "Auction already running")
 
     auction_state["status"] = "running"
     auction_state["human_team"] = req.human_team
+    
+    # Map frontend full names to backend shorthand IDs
+    TEAM_ID_MAP = {
+        "Mumbai Indians": "MI",
+        "Chennai Super Kings": "CSK",
+        "Royal Challengers Bangalore": "RCB",
+        "Kolkata Knight Riders": "KKR",
+        "Delhi Capitals": "DC",
+        "Rajasthan Royals": "RR",
+        "Sunrisers Hyderabad": "SRH",
+        "Punjab Kings": "PBKS",
+        "Gujarat Titans": "GT",
+        "Lucknow Super Giants": "LSG"
+    }
+    mapped_team_id = TEAM_ID_MAP.get(req.human_team) if req.human_team else None
 
-    # TODO: replace stub with real engine call
-    # threading.Thread(target=run_real_auction, args=(req.human_team,), daemon=True).start()
-    _start_stub_auction()
+    def run():
+        global _auction_state
+        # 1. Load data
+        memory = MemoryStore("data/team_profiles.json")
+        with open("data/mock_players.json", "r") as f:
+            unsold_players = [Player(**p) for p in json.load(f)]
+
+        # 2. Build state and agents
+        initial_state = AuctionState(unsold_players=unsold_players)
+        team_agents = {}
+
+        for t_id, t_prof in memory.team_profiles.items():
+            team_name = next((k for k, v in TEAM_ID_MAP.items() if v == t_id), f"{t_id} Franchise")
+            team = Team(id=t_id, name=team_name)
+            initial_state.teams[t_id] = team
+            if t_id != mapped_team_id:
+                team_agents[t_id] = TeamAgent(team=team, personality=t_prof)
+
+        # 3. Build engine and orchestrator
+        engine = AuctionEngine(initial_state)
+        orch = AuctionOrchestrator(
+            engine=engine,
+            team_agents=team_agents,
+            human_team_id=mapped_team_id,
+            memory=memory
+        )
+        
+        _auction_state = engine.state
+        orch.run_auction(test_mode=False)
+        auction_state["status"] = "finished"
+        sync_broadcast({"type": "auction_finished"})
+
+    threading.Thread(target=run, daemon=True).start()
 
     await broadcast({"type": "auction_started", "human_team": req.human_team})
     return {"ok": True}
@@ -133,17 +205,56 @@ async def human_action(req: HumanActionRequest):
 # ── REST: state queries ───────────────────────────────────────────────────────
 @app.get("/state")
 async def get_full_state():
-    """
-    Returns the complete serialisable auction state.
-    Replace stub data with your real AuctionState fields.
-    """
-    # TODO: replace with real state pulled from your AuctionState / engine
+    if _auction_state is None:
+        return {"auction": auction_state, "teams": _stub_teams(), "players_remaining": _stub_remaining_players(), "players_sold": _stub_sold_players(), "feed": _stub_feed()}
+    
+    # Fill in tracking values
+    if _auction_state.current_player:
+        auction_state["current_player"] = _auction_state.current_player.model_dump()
+        role = auction_state["current_player"].get("role", "batter")
+        auction_state["current_player"]["role"] = ROLE_MAP.get(role, "BAT")
+        auction_state["current_player"]["base_price"] = round(auction_state["current_player"]["base_price"] / 100000)
+        auction_state["current_player"]["country"] = auction_state["current_player"].get("nationality", "").upper()
+    else:
+        auction_state["current_player"] = None
+    
+    auction_state["current_bid"] = round(_auction_state.current_bid / 100000) if getattr(_auction_state, "current_bid", 0) else 0
+    auction_state["current_bid_team"] = getattr(_auction_state, "highest_bidder", None)
+        
+    def get_sold_player_info(pid: str):
+        for p in _auction_state.sold_players:
+            if p.id == pid:
+                return p.name, ROLE_MAP.get(p.role, "BAT")
+        return pid, "BAT"
+        
+    def get_sold_player_details(pid: str):
+        for t_id, team in _auction_state.teams.items():
+            if pid in team.squad:
+                return team.name, round(team.squad[pid] / 100000)
+        return None, 0
+        
     return {
         "auction": auction_state,
-        "teams": _stub_teams(),
-        "players_sold": _stub_sold_players(),
-        "players_remaining": _stub_remaining_players(),
-        "feed": _stub_feed(),
+        "teams": [
+            {
+                "name": t.name,
+                "short": t.id,
+                "color": "#6366f1",  # Hardcoded or map it later
+                "budget_total": round(t.total_budget / 100000), # in Lakhs
+                "budget_remaining": round(t.remaining_budget / 100000), # in Lakhs
+                "players": [
+                    {
+                        "name": get_sold_player_info(pid)[0],
+                        "role": get_sold_player_info(pid)[1],
+                        "price": round(price / 100000)
+                    }
+                    for pid, price in t.squad.items()
+                ]
+            }
+            for t in _auction_state.teams.values()
+        ],
+        "players_remaining": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "base_price": round(p.base_price / 100000), "country": p.nationality.upper() if p.nationality else None, "specialist_tags": []} for p in (_auction_state.unsold_players + _auction_state.truly_unsold_players)],
+        "players_sold": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "sold_to": get_sold_player_details(p.id)[0], "sold_price": get_sold_player_details(p.id)[1], "base_price": round(p.base_price / 100000)} for p in _auction_state.sold_players]
     }
 
 
@@ -167,15 +278,35 @@ async def get_summary():
     """End-of-auction summary report."""
     if auction_state["status"] not in ("finished", "running"):
         raise HTTPException(400, "Auction not started")
-    teams = _stub_teams()
+        
+    if _auction_state is None:
+        teams = _stub_teams()
+        return [
+            {
+                "team": t["name"],
+                "budget_spent": t["budget_total"] - t["budget_remaining"],
+                "budget_remaining": t["budget_remaining"],
+                "players_bought": t["players"],
+                "role_breakdown": _role_breakdown(t["players"]),
+            }
+            for t in teams
+        ]
+        
     summary = []
-    for t in teams:
+    
+    def get_sold_player_info(pid: str):
+        for p in _auction_state.sold_players:
+            if p.id == pid:
+                return {"name": p.name, "role": ROLE_MAP.get(p.role, "BAT")}
+        return {"name": pid, "role": "BAT"}
+
+    for t_id, t in _auction_state.teams.items():
         summary.append({
-            "team": t["name"],
-            "budget_spent": t["budget_total"] - t["budget_remaining"],
-            "budget_remaining": t["budget_remaining"],
-            "players_bought": t["players"],
-            "role_breakdown": _role_breakdown(t["players"]),
+            "team": t.name,
+            "budget_spent": round((t.total_budget - t.remaining_budget) / 100000),
+            "budget_remaining": round(t.remaining_budget / 100000),
+            "players_bought": [{"name": get_sold_player_info(pid)["name"], "price": round(price / 100000)} for pid, price in t.squad.items()],
+            "role_breakdown": {ROLE_MAP.get(k, k): v for k, v in t.roles_count.items()},
         })
     return summary
 

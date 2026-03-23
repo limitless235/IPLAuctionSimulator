@@ -60,19 +60,34 @@ class ValuationFilter:
         # Aggression multiplier
         max_price = int(base_val * (1 + self.personality["aggression"] * 0.5))
 
+        # Tier-based multiplier for marquee flexibility
+        slots_needed = max(1, self.team.min_squad_size - self.team.squad_size)
+        avg_slot_budget = self.team.remaining_budget / slots_needed
+        tier_multiplier = {1: 4.5, 2: 3.0, 3: 1.8, 4: 1.2}
+        multiplier = tier_multiplier.get(self.player.tier, 2.0)
+        max_price = min(max_price, int(avg_slot_budget * multiplier * self.personality["price_tolerance"]))
+
         # Hard cap at price_tolerance * remaining_budget
-        # Cap at 30% of total budget for any single player
-        max_price = min(max_price, int(self.team.total_budget * 0.29 * self.personality["price_tolerance"]))
+        # Cap at 29% of remaining budget for any single player
+        conservatism_factor = 1.0 - (self.personality["budget_conservatism"] * 0.15)
+        
+        # Ignore conservatism and push absolute limit if extremely desperate
+        if self.scarcity_index < 0.25:
+            desperation = self.personality["scarcity_sensitivity"] * 0.4
+            conservatism_factor = min(1.5, conservatism_factor + desperation)
+            
+        max_price = min(max_price, int(avg_slot_budget * multiplier * self.personality["price_tolerance"] * conservatism_factor))
 
         return max_price
 
     def _get_squad_need_score(self) -> float:
+    # Simple check — does team have any of this role yet
         role_count = self.team.roles_count.get(self.player.role, 0)
         if role_count == 0:
             return 1.0
-        if role_count >= 5:
+        if role_count >= 6:
             return 0.0
-        return max(0.0, 1.0 - (role_count / 5.0))
+        return max(0.0, 1.0 - (role_count / 6.0))
 
     def get_budget_pressure(self) -> float:
         return self.team.remaining_budget / float(self.team.total_budget)
@@ -82,6 +97,8 @@ class ValuationFilter:
         if self.player.nationality == "overseas":
             if self.team.overseas_slots_used >= 4:
                 return True
+        # Hard stop if role is saturated
+        
 
         # Squad full
         if self.team.squad_size >= self.team.max_squad_size:
@@ -98,9 +115,6 @@ class ValuationFilter:
         risk_aversion = self.personality["risk_aversion"]
         if pressure < 0.4:
             risk_aversion = min(1.0, risk_aversion * 1.3)
-        if pressure < 0.2:
-            if self._get_squad_need_score() < 0.8:
-                return True
 
         # Max price check
         max_price = self.calculate_max_price()
