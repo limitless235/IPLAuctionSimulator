@@ -134,13 +134,14 @@ function FeedItem({ item }) {
   );
 }
 
-function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams }) {
+function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams, onToggleSpeed }) {
   const [customBid, setCustomBid] = useState("");
   const player = auction?.current_player;
   const currentBid = auction?.current_bid || 0;
   const leadingTeam = auction?.current_bid_team;
   const isHumanTurn = auction?.human_action_pending && humanTeam;
   const nextBid = currentBid ? Math.round(currentBid * 1.1) : player?.base_price || 0;
+  const speed = auction?.speed || "normal";
 
   if (!player) return (
     <div style={{ textAlign: "center", padding: "40px 20px", color: "#475569" }}>
@@ -152,8 +153,21 @@ function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams }) {
   return (
     <div>
       <div style={{ marginBottom: 16 }}>
-        <div style={{ fontSize: 11, color: "#6366f1", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 8 }}>
-          {isHumanTurn ? "⚡ Your Turn" : "🔴 Live Now"}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+          <div style={{ fontSize: 11, color: "#6366f1", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            {isHumanTurn ? "⚡ Your Turn" : "🔴 Live Now"}
+          </div>
+          {!isHumanTurn && auction?.status === "running" && (
+            <button onClick={onToggleSpeed} style={{
+              background: speed === "fast" ? "rgba(245,158,11,0.2)" : "rgba(255,255,255,0.05)",
+              border: `1px solid ${speed === "fast" ? "rgba(245,158,11,0.4)" : "rgba(255,255,255,0.1)"}`,
+              color: speed === "fast" ? "#fcd34d" : "#94a3b8",
+              padding: "4px 10px", borderRadius: 12, fontSize: 11, fontWeight: 700, cursor: "pointer",
+              display: "flex", alignItems: "center", gap: 4
+            }}>
+              {speed === "fast" ? "⏪ Normal Speed" : "⏩ Fast Forward"}
+            </button>
+          )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <div style={{
@@ -231,29 +245,36 @@ function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams }) {
   );
 }
 
-function SummaryView({ summary }) {
-  if (!summary?.length) return <div style={{ color: "#64748b", textAlign: "center", padding: 40 }}>No summary yet.</div>;
+function SummaryView({ teams }) {
+  if (!teams?.length) return <div style={{ color: "#64748b", textAlign: "center", padding: 40 }}>No summary yet.</div>;
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      {summary.map(t => (
-        <div key={t.team} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "12px 16px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#f1f5f9" }}>{t.team}</div>
-            <div style={{ fontSize: 12, color: "#22c55e", fontWeight: 600 }}>₹{t.budget_remaining}L left</div>
+      {teams.map(t => {
+        const role_breakdown = {};
+        (t.players || []).forEach(p => {
+          role_breakdown[p.role] = (role_breakdown[p.role] || 0) + 1;
+        });
+        
+        return (
+          <div key={t.name} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "12px 16px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#f1f5f9" }}>{t.name}</div>
+              <div style={{ fontSize: 12, color: "#22c55e", fontWeight: 600 }}>₹{t.budget_remaining}L left</div>
+            </div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              {Object.entries(role_breakdown).map(([role, count]) => count > 0 && (
+                <span key={role} style={{
+                  fontSize: 11, fontWeight: 600, padding: "2px 9px", borderRadius: 20,
+                  background: ROLE_COLOR[role] + "22", color: ROLE_COLOR[role], border: `1px solid ${ROLE_COLOR[role]}44`
+                }}>{count} {ROLE_LABEL[role]}{count > 1 ? "s" : ""}</span>
+              ))}
+            </div>
+            <div style={{ marginTop: 8, fontSize: 11, color: "#475569" }}>
+              Spent: ₹{t.budget_total - t.budget_remaining}L &nbsp;·&nbsp; {t.players?.length || 0} players signed
+            </div>
           </div>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {Object.entries(t.role_breakdown || {}).map(([role, count]) => count > 0 && (
-              <span key={role} style={{
-                fontSize: 11, fontWeight: 600, padding: "2px 9px", borderRadius: 20,
-                background: ROLE_COLOR[role] + "22", color: ROLE_COLOR[role], border: `1px solid ${ROLE_COLOR[role]}44`
-              }}>{count} {ROLE_LABEL[role]}{count > 1 ? "s" : ""}</span>
-            ))}
-          </div>
-          <div style={{ marginTop: 8, fontSize: 11, color: "#475569" }}>
-            Spent: ₹{t.budget_spent}L &nbsp;·&nbsp; {t.players_bought?.length || 0} players signed
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -261,7 +282,6 @@ function SummaryView({ summary }) {
 export default function App() {
   const [state, setState] = useState(null);
   const [feed, setFeed] = useState([]);
-  const [summary, setSummary] = useState(null);
   const [tab, setTab] = useState("live");  // live | teams | queue | summary
   const [humanTeam, setHumanTeam] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("");
@@ -277,6 +297,8 @@ export default function App() {
     } else if (msg.type === "bid_placed" || msg.type === "player_sold") {
       setState(prev => ({ ...prev, auction: { ...prev?.auction, ...msg } }));
       setFeed(prev => [{ time: new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }), text: msg.text, type: msg.event_type }, ...prev].slice(0, 10));
+    } else if (msg.type === "speed_changed") {
+      setState(prev => ({ ...prev, auction: { ...prev?.auction, speed: msg.speed } }));
     }
   }, []);
 
@@ -289,11 +311,6 @@ export default function App() {
     }).catch(() => {});
   }, []);
 
-  useEffect(() => {
-    if (tab === "summary") {
-      fetch(`${API}/state/summary`).then(r => r.json()).then(setSummary).catch(() => {});
-    }
-  }, [tab]);
 
   const startAuction = async () => {
     await fetch(`${API}/auction/start`, {
@@ -301,6 +318,14 @@ export default function App() {
       body: JSON.stringify({ human_team: humanTeam || null })
     });
     setSetupMode(false);
+  };
+
+  const toggleSpeed = async () => {
+    const newSpeed = state?.auction?.speed === "fast" ? "normal" : "fast";
+    await fetch(`${API}/auction/speed`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ speed: newSpeed })
+    });
   };
 
   const sendHumanAction = async (action, amount) => {
@@ -421,6 +446,7 @@ export default function App() {
                 teams={teams}
                 onBid={(amt) => sendHumanAction("bid", amt)}
                 onPass={() => sendHumanAction("pass")}
+                onToggleSpeed={toggleSpeed}
               />
             </div>
 
@@ -531,7 +557,7 @@ export default function App() {
               )}
 
               {/* Summary tab */}
-              {tab === "summary" && <SummaryView summary={summary} />}
+              {tab === "summary" && <SummaryView teams={teams} />}
             </div>
           </div>
         </div>

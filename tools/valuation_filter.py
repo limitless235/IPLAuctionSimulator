@@ -13,7 +13,7 @@ class ValuationFilter:
 
     def calculate_max_price(self) -> int:
         # Tier-based market valuation
-        tier_base = {1: 80000000, 2: 40000000, 3: 15000000, 4: 5000000}
+        tier_base = {1: 55000000, 2: 30000000, 3: 15000000, 4: 5000000}
         base_val = tier_base.get(self.player.tier, 30000000)
 
         # Star and brand value boost
@@ -65,6 +65,19 @@ class ValuationFilter:
         avg_slot_budget = self.team.remaining_budget / slots_needed
         tier_multiplier = {1: 4.5, 2: 3.0, 3: 1.8, 4: 1.2}
         multiplier = tier_multiplier.get(self.player.tier, 2.0)
+        
+        # Generational Player Premium - allows teams to momentarily shatter mathematical ceilings 
+        # to bid historic, record-breaking amounts on iconic franchise-defining superstars.
+        if self.player.brand_value >= 0.85:
+            multiplier *= 1.8  # e.g., 4.5 -> 8.1
+        elif self.player.is_star or self.player.brand_value >= 0.7:
+            multiplier *= 1.4  # e.g., 4.5 -> 6.3
+            
+        # Impact Player Rule Reality
+        if self.player.role == "all_rounder" and not self.player.is_star and self.player.brand_value < 0.7:
+            # Drastically slash the budget multiplier for average all-rounders
+            multiplier *= 0.4
+            
         max_price = min(max_price, int(avg_slot_budget * multiplier * self.personality["price_tolerance"]))
 
         # Hard cap at price_tolerance * remaining_budget
@@ -77,6 +90,12 @@ class ValuationFilter:
             conservatism_factor = min(1.5, conservatism_factor + desperation)
             
         max_price = min(max_price, int(avg_slot_budget * multiplier * self.personality["price_tolerance"] * conservatism_factor))
+
+        import random
+        # Add realistic minor variance (+/- 5%) to max bid ceilings, representing 
+        # small boardroom disagreements during high-stakes bidding wars.
+        jitter = random.uniform(0.95, 1.05)
+        max_price = int(max_price * jitter)
 
         return max_price
 
@@ -97,8 +116,11 @@ class ValuationFilter:
         if self.player.nationality == "overseas":
             if self.team.overseas_slots_used >= 4:
                 return True
-        # Hard stop if role is saturated
-        
+        # Softened hard stop to allow teams to hoard steals while maintaining baseline balance
+        role_limits = {"batter": 9, "bowler": 9, "all_rounder": 8, "wicket_keeper": 4}
+        limit = role_limits.get(self.player.role, 6)
+        if self.team.roles_count.get(self.player.role, 0) >= limit:
+            return True
 
         # Squad full
         if self.team.squad_size >= self.team.max_squad_size:

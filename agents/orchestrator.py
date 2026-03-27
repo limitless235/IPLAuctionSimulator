@@ -57,6 +57,8 @@ class AuctionOrchestrator:
                     self.engine.state.unsold_players,
                     self.engine.state.unsold_players + self.engine.state.sold_players
                 )
+                from backend.main import send_state_snapshot
+                send_state_snapshot()
                 continue
 
             if len(active) == 1 and state.highest_bidder == active[0]:
@@ -75,6 +77,8 @@ class AuctionOrchestrator:
                     self.engine.state.unsold_players,
                     self.engine.state.unsold_players + self.engine.state.sold_players
                 )
+                from backend.main import send_state_snapshot
+                send_state_snapshot()
                 continue
 
             # Full round-robin through all active bidders
@@ -144,12 +148,19 @@ class AuctionOrchestrator:
             sync_broadcast({
                 "type": "bid_placed",
                 "player": player.name,
-                "team": team_id,
-                "amount": round(new_bid / 100000),
+                "current_bid_team": team_id,
+                "current_bid": round(new_bid / 100000),
                 "text": f"{team_id} bids ₹{round(new_bid / 100000)}L on {player.name}",
                 "event_type": "bid",
                 "human_action_pending": auction_state.get("human_action_pending", False)
             })
+            
+            # Spectator Mode & UI Visibility Delay
+            # Introduce an artificial "thinking" delay after every AI bid so human spectators
+            # can actually read the bid amount on the frontend UI before the loop completes.
+            if not test_mode and team_id != self.human_team_id:
+                delay = 1.2 if auction_state.get("speed", "normal") == "normal" else 0.0001
+                time.sleep(delay)
             
         elif resp["status"] == "ERROR":
             self._log_test(test_mode, f"[ERROR] Engine rejected {team_id}", resp["error_msg"])

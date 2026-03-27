@@ -102,13 +102,13 @@ class TeamAgent:
         if auction_progress > 0.66 and player.tier >= 3:
             score += self.personality["late_value_hunting"] * 0.15
 
-        # Star and brand value
+        # Star and brand value - huge bump for stars regardless of Tier
         if player.is_star:
-            score += self.personality["star_bias"] * 0.2
-        score += player.brand_value * self.personality["star_bias"] * 0.1
+            score += self.personality["star_bias"] * 0.35 + 0.25
+        score += player.brand_value * self.personality["star_bias"] * 0.15
 
-        # Tier scoring
-        tier_score = {1: 0.25, 2: 0.15, 3: 0.05, 4: 0.0}
+        # Tier scoring - heavily buffed to ensure Elite Tier 1/2 don't go unsold
+        tier_score = {1: 0.40, 2: 0.25, 3: 0.05, 4: 0.0}
         score += tier_score.get(player.tier, 0.0)
 
         # Recent form
@@ -126,14 +126,22 @@ class TeamAgent:
         if player.spin_bowler:
             score += self.personality["spin_bias"] * 0.12
 
-        # Allrounder bias
+        # Allrounder bias & Impact Player Rule Reality
         if player.role == "all_rounder":
-            score += self.personality["allrounder_bias"] * 0.1
+            if player.is_star or player.brand_value >= 0.75:
+                # Premium all-rounders are still highly coveted
+                score += self.personality["allrounder_bias"] * 0.1
+            else:
+                # Average all-rounders are severely devalued due to the Impact Player rule
+                score -= 0.25
+        elif player.role in ["batter", "bowler"]:
+            # Slight buff to pure specialists as teams prefer 12 specialists over mediocre balanced XIs
+            score += 0.08
 
-        # Overseas bias
+        # Overseas bias - significantly loosened so top foreigners aren't ignored
         if player.nationality == "overseas":
-            score += self.personality["foreign_bias"] * 0.08
-            score += self.personality["value_foreign_bias"] * 0.08
+            score += self.personality["foreign_bias"] * 0.18
+            score += self.personality["value_foreign_bias"] * 0.18
 
         # Scarcity sensitivity
         if scarcity_index < 0.4:
@@ -154,7 +162,7 @@ class TeamAgent:
         budget_ratio = self.team.remaining_budget / self.team.total_budget
         if budget_ratio < 0.3:
             score -= self.personality["risk_aversion"] * 0.25
-        if budget_ratio < 0.15:
+        if budget_ratio < 0.15 and not player.is_star:
             score -= 0.35
 
         # Budget conservatism early
@@ -168,7 +176,7 @@ class TeamAgent:
             score -= 0.2
 
         # Mandatory minimum reached: be extremely picky about filling up to 25
-        if self.team.squad_size >= self.team.min_squad_size:
+        if self.team.squad_size >= self.team.min_squad_size and not player.is_star:
             score -= 0.4
             
         # Base quality check: don't automatically buy bad Tier 4/3 players just to fill seats

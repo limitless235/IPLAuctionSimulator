@@ -39,6 +39,7 @@ auction_state = {
     "timer_seconds": 15,
     "human_team": None,
     "human_action_pending": False,
+    "speed": "normal", # "normal" | "fast"
 }
 
 _auction_state: Optional[AuctionState] = None
@@ -177,6 +178,16 @@ async def resume_auction():
     return {"ok": True}
 
 
+class SpeedRequest(BaseModel):
+    speed: str
+
+@app.post("/auction/speed")
+async def set_speed(req: SpeedRequest):
+    auction_state["speed"] = req.speed
+    await broadcast({"type": "speed_changed", "speed": req.speed})
+    return {"ok": True}
+
+
 # ── REST: human player action ─────────────────────────────────────────────────
 class HumanActionRequest(BaseModel):
     action: str          # "bid" | "pass"
@@ -213,8 +224,9 @@ async def get_full_state():
         auction_state["current_player"] = _auction_state.current_player.model_dump()
         role = auction_state["current_player"].get("role", "batter")
         auction_state["current_player"]["role"] = ROLE_MAP.get(role, "BAT")
-        auction_state["current_player"]["base_price"] = round(auction_state["current_player"]["base_price"] / 100000)
-        auction_state["current_player"]["country"] = auction_state["current_player"].get("nationality", "").upper()
+        auction_state["current_player"]["base_price"] = round(auction_state["current_player"].get("base_price", 0) / 100000)
+        nat = auction_state["current_player"].get("nationality")
+        auction_state["current_player"]["country"] = nat.upper() if nat else "IND"
     else:
         auction_state["current_player"] = None
     
@@ -222,17 +234,21 @@ async def get_full_state():
     auction_state["current_bid_team"] = getattr(_auction_state, "highest_bidder", None)
         
     def get_sold_player_info(pid: str):
-        for p in _auction_state.sold_players:
+        sold_list = list(_auction_state.sold_players)
+        for p in sold_list:
             if p.id == pid:
                 return p.name, ROLE_MAP.get(p.role, "BAT")
         return pid, "BAT"
         
     def get_sold_player_details(pid: str):
-        for t_id, team in _auction_state.teams.items():
+        team_list = list(_auction_state.teams.items())
+        for t_id, team in team_list:
             if pid in team.squad:
                 return team.name, round(team.squad[pid] / 100000)
         return None, 0
         
+    teams_list = list(_auction_state.teams.values())
+    
     return {
         "auction": auction_state,
         "teams": [
@@ -248,13 +264,13 @@ async def get_full_state():
                         "role": get_sold_player_info(pid)[1],
                         "price": round(price / 100000)
                     }
-                    for pid, price in t.squad.items()
+                    for pid, price in list(t.squad.items())
                 ]
             }
-            for t in _auction_state.teams.values()
+            for t in teams_list
         ],
-        "players_remaining": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "base_price": round(p.base_price / 100000), "country": p.nationality.upper() if p.nationality else None, "specialist_tags": []} for p in (_auction_state.unsold_players + _auction_state.truly_unsold_players)],
-        "players_sold": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "sold_to": get_sold_player_details(p.id)[0], "sold_price": get_sold_player_details(p.id)[1], "base_price": round(p.base_price / 100000)} for p in _auction_state.sold_players]
+        "players_remaining": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "base_price": round(p.base_price / 100000), "country": p.nationality.upper() if p.nationality else None, "specialist_tags": []} for p in (list(_auction_state.unsold_players) + list(_auction_state.truly_unsold_players))],
+        "players_sold": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "sold_to": get_sold_player_details(p.id)[0], "sold_price": get_sold_player_details(p.id)[1], "base_price": round(p.base_price / 100000)} for p in list(_auction_state.sold_players)]
     }
 
 

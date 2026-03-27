@@ -11,7 +11,10 @@ def sort_players_for_auction(players: List[Player]) -> List[Player]:
     result = []
 
     def add_group(group):
-        for p in group:
+        import random
+        group_list = list(group)
+        random.shuffle(group_list)
+        for p in group_list:
             if p.id not in seen:
                 result.append(p)
                 seen.add(p.id)
