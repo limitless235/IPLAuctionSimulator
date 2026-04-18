@@ -16,12 +16,25 @@ class AuctionOrchestrator:
         self.human_team_id = human_team_id
         self.memory = memory or MemoryStore()
 
+    def _await_if_paused(self, test_mode: bool):
+        if test_mode:
+            return
+
+        try:
+            from backend.main import auction_state
+        except Exception:
+            return
+
+        while auction_state.get("status") == "paused":
+            time.sleep(0.1)
+
     def run_auction(self, test_mode: bool = False):
         print("Starting IPL Auction Simulator...")
         resp = self.engine.start_auction()
         self._log_test(test_mode, "AUCTION START", resp)
 
         while True:
+            self._await_if_paused(test_mode)
             state = self.engine.get_state()
 
             if state.is_auction_complete:
@@ -83,6 +96,7 @@ class AuctionOrchestrator:
 
             # Full round-robin through all active bidders
             for current_team_id in active:
+                self._await_if_paused(test_mode)
                 state = self.engine.get_state()
                 if state.is_auction_complete or not state.current_player:
                     break

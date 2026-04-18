@@ -6,6 +6,16 @@ const WS_URL = "ws://localhost:8000/ws";
 const ROLE_COLOR = { BAT: "#3b82f6", BOWL: "#ef4444", ALL: "#f59e0b", WK: "#8b5cf6" };
 const ROLE_LABEL = { BAT: "Batter", BOWL: "Bowler", ALL: "All-rounder", WK: "Keeper" };
 
+function getNextBid(currentBid, basePrice = 0) {
+  if (!currentBid) return basePrice;
+  if (currentBid < 100) return currentBid + 5;
+  if (currentBid < 200) return currentBid + 10;
+  if (currentBid < 500) return currentBid + 20;
+  if (currentBid < 1000) return currentBid + 25;
+  if (currentBid < 2000) return currentBid + 50;
+  return currentBid + 100;
+}
+
 function useWebSocket(onMessage) {
   const wsRef = useRef(null);
   const [connected, setConnected] = useState(false);
@@ -134,13 +144,12 @@ function FeedItem({ item }) {
   );
 }
 
-function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams, onToggleSpeed }) {
-  const [customBid, setCustomBid] = useState("");
+function LiveBidPanel({ auction, onBid, onPass, humanTeam, onToggleSpeed }) {
   const player = auction?.current_player;
   const currentBid = auction?.current_bid || 0;
   const leadingTeam = auction?.current_bid_team;
   const isHumanTurn = auction?.human_action_pending && humanTeam;
-  const nextBid = currentBid ? Math.round(currentBid * 1.1) : player?.base_price || 0;
+  const nextBid = getNextBid(currentBid, player?.base_price || 0);
   const speed = auction?.speed || "normal";
 
   if (!player) return (
@@ -224,20 +233,8 @@ function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams, onToggleSpeed 
               fontSize: 14, fontWeight: 700, cursor: "pointer"
             }}>Pass</button>
           </div>
-          <div style={{ display: "flex", gap: 8 }}>
-            <input
-              type="number" placeholder="Custom amount (L)"
-              value={customBid} onChange={e => setCustomBid(e.target.value)}
-              style={{
-                flex: 1, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)",
-                borderRadius: 8, padding: "8px 12px", color: "#f1f5f9", fontSize: 13, outline: "none"
-              }}
-            />
-            <button onClick={() => { if (customBid) { onBid(parseInt(customBid)); setCustomBid(""); } }}
-              style={{
-                padding: "8px 16px", background: "rgba(99,102,241,0.2)", border: "1px solid rgba(99,102,241,0.4)",
-                borderRadius: 8, color: "#a5b4fc", fontSize: 13, fontWeight: 600, cursor: "pointer"
-              }}>Custom</button>
+          <div style={{ fontSize: 11, color: "#64748b" }}>
+            Human bids currently follow the simulator&apos;s official bid increment rules.
           </div>
         </div>
       )}
@@ -339,6 +336,8 @@ export default function App() {
   const remaining = state?.players_remaining || [];
   const auction = state?.auction || {};
   const status = auction.status || "idle";
+  const playerPoolSize = state?.meta?.player_pool_size || 221;
+  const humanTeamShort = teams.find((t) => t.name === auction.human_team)?.short || "";
 
   const TABS = [
     { id: "live", label: "🔴 Live" },
@@ -347,7 +346,8 @@ export default function App() {
     { id: "summary", label: "📊 Summary" },
   ];
   
-  const activeTeamForSquad = selectedTeam || auction.human_team;
+  const activeTeamForSquad = selectedTeam || humanTeamShort;
+  const activeTeam = teams.find((t) => t.short === activeTeamForSquad);
 
   return (
     <div style={{
@@ -403,7 +403,7 @@ export default function App() {
           }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🏏</div>
             <div style={{ fontSize: 26, fontWeight: 800, color: "#f8fafc", marginBottom: 8 }}>IPL Auction 2025</div>
-            <div style={{ fontSize: 14, color: "#64748b", marginBottom: 32 }}>228 players · 10 teams · ₹1200L budget each</div>
+            <div style={{ fontSize: 14, color: "#64748b", marginBottom: 32 }}>{playerPoolSize} players · 10 teams · ₹1200L budget each</div>
 
             <div style={{ marginBottom: 20, textAlign: "left" }}>
               <label style={{ fontSize: 12, color: "#94a3b8", display: "block", marginBottom: 6 }}>Play as a team (optional)</label>
@@ -443,7 +443,6 @@ export default function App() {
               <LiveBidPanel
                 auction={auction}
                 humanTeam={auction.human_team}
-                teams={teams}
                 onBid={(amt) => sendHumanAction("bid", amt)}
                 onPass={() => sendHumanAction("pass")}
                 onToggleSpeed={toggleSpeed}
@@ -487,10 +486,10 @@ export default function App() {
                     {teams.map(t => (
                       <TeamCard
                         key={t.name} team={t}
-                        isHuman={t.name === auction.human_team}
-                        isHighBidder={t.name === auction.current_bid_team}
-                        isSelected={t.name === activeTeamForSquad}
-                        onClick={() => setSelectedTeam(t.name)}
+                        isHuman={t.short === humanTeamShort}
+                        isHighBidder={t.short === auction.current_bid_team}
+                        isSelected={t.short === activeTeamForSquad}
+                        onClick={() => setSelectedTeam(t.short)}
                       />
                     ))}
                   </div>
@@ -498,9 +497,9 @@ export default function App() {
                   {/* Expanded squad for active team */}
                   {activeTeamForSquad && (
                     <div style={{ marginTop: 28 }}>
-                      <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 600, letterSpacing: "0.07em", marginBottom: 12 }}>SQUAD — {activeTeamForSquad}</div>
+                      <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 600, letterSpacing: "0.07em", marginBottom: 12 }}>SQUAD — {activeTeam?.name || activeTeamForSquad}</div>
                       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 8 }}>
-                        {(teams.find(t => t.name === activeTeamForSquad)?.players || []).map((p, i) => (
+                        {(activeTeam?.players || []).map((p, i) => (
                           <div key={i} style={{
                             display: "flex", alignItems: "center", gap: 12,
                             background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.15)",

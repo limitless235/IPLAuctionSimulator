@@ -71,6 +71,92 @@ def send_state_snapshot():
             await broadcast({"type": "state_snapshot", "data": snap})
         asyncio.run_coroutine_threadsafe(_send(), _main_loop)
 
+
+def _player_pool_size() -> int:
+    try:
+        with open("data/mock_players.json", "r") as f:
+            return len(json.load(f))
+    except Exception:
+        return 0
+
+
+def _serialize_player(player: Player) -> dict:
+    return {
+        "name": player.name,
+        "role": ROLE_MAP.get(player.role, "BAT"),
+        "base_price": round(player.base_price / 100000),
+        "country": player.nationality.upper() if player.nationality else None,
+        "specialist_tags": [player.specialist_tag] if player.specialist_tag else [],
+    }
+
+
+def _get_sold_player_info(pid: str):
+    if _auction_state is None:
+        return {"name": pid, "role": "BAT"}
+    for p in _auction_state.sold_players:
+        if p.id == pid:
+            return {"name": p.name, "role": ROLE_MAP.get(p.role, "BAT")}
+    return {"name": pid, "role": "BAT"}
+
+
+def _get_sold_player_details(pid: str):
+    if _auction_state is None:
+        return None, 0
+    for _, team in _auction_state.teams.items():
+        if pid in team.squad:
+            return team.name, round(team.squad[pid] / 100000)
+    return None, 0
+
+
+def _serialize_teams():
+    if _auction_state is None:
+        return _stub_teams()
+
+    return [
+        {
+            "name": t.name,
+            "short": t.id,
+            "color": "#6366f1",
+            "budget_total": round(t.total_budget / 100000),
+            "budget_remaining": round(t.remaining_budget / 100000),
+            "players": [
+                {
+                    "name": _get_sold_player_info(pid)["name"],
+                    "role": _get_sold_player_info(pid)["role"],
+                    "price": round(price / 100000),
+                }
+                for pid, price in t.squad.items()
+            ],
+        }
+        for t in _auction_state.teams.values()
+    ]
+
+
+def _serialize_remaining_players():
+    if _auction_state is None:
+        return _stub_remaining_players()
+
+    return [
+        _serialize_player(p)
+        for p in (list(_auction_state.unsold_players) + list(_auction_state.truly_unsold_players))
+    ]
+
+
+def _serialize_sold_players():
+    if _auction_state is None:
+        return _stub_sold_players()
+
+    return [
+        {
+            "name": p.name,
+            "role": ROLE_MAP.get(p.role, "BAT"),
+            "sold_to": _get_sold_player_details(p.id)[0],
+            "sold_price": _get_sold_player_details(p.id)[1],
+            "base_price": round(p.base_price / 100000),
+        }
+        for p in _auction_state.sold_players
+    ]
+
 # ── WebSocket broadcast helper ────────────────────────────────────────────────
 async def broadcast(payload: dict):
     dead = []
@@ -217,7 +303,14 @@ async def human_action(req: HumanActionRequest):
 @app.get("/state")
 async def get_full_state():
     if _auction_state is None:
-        return {"auction": auction_state, "teams": _stub_teams(), "players_remaining": _stub_remaining_players(), "players_sold": _stub_sold_players(), "feed": _stub_feed()}
+        return {
+            "auction": auction_state,
+            "teams": _stub_teams(),
+            "players_remaining": _stub_remaining_players(),
+            "players_sold": _stub_sold_players(),
+            "feed": _stub_feed(),
+            "meta": {"player_pool_size": _player_pool_size()},
+        }
     
     # Fill in tracking values
     if _auction_state.current_player:
@@ -233,60 +326,28 @@ async def get_full_state():
     auction_state["current_bid"] = round(_auction_state.current_bid / 100000) if getattr(_auction_state, "current_bid", 0) else 0
     auction_state["current_bid_team"] = getattr(_auction_state, "highest_bidder", None)
         
-    def get_sold_player_info(pid: str):
-        sold_list = list(_auction_state.sold_players)
-        for p in sold_list:
-            if p.id == pid:
-                return p.name, ROLE_MAP.get(p.role, "BAT")
-        return pid, "BAT"
-        
-    def get_sold_player_details(pid: str):
-        team_list = list(_auction_state.teams.items())
-        for t_id, team in team_list:
-            if pid in team.squad:
-                return team.name, round(team.squad[pid] / 100000)
-        return None, 0
-        
-    teams_list = list(_auction_state.teams.values())
-    
     return {
         "auction": auction_state,
-        "teams": [
-            {
-                "name": t.name,
-                "short": t.id,
-                "color": "#6366f1",  # Hardcoded or map it later
-                "budget_total": round(t.total_budget / 100000), # in Lakhs
-                "budget_remaining": round(t.remaining_budget / 100000), # in Lakhs
-                "players": [
-                    {
-                        "name": get_sold_player_info(pid)[0],
-                        "role": get_sold_player_info(pid)[1],
-                        "price": round(price / 100000)
-                    }
-                    for pid, price in list(t.squad.items())
-                ]
-            }
-            for t in teams_list
-        ],
-        "players_remaining": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "base_price": round(p.base_price / 100000), "country": p.nationality.upper() if p.nationality else None, "specialist_tags": []} for p in (list(_auction_state.unsold_players) + list(_auction_state.truly_unsold_players))],
-        "players_sold": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "sold_to": get_sold_player_details(p.id)[0], "sold_price": get_sold_player_details(p.id)[1], "base_price": round(p.base_price / 100000)} for p in list(_auction_state.sold_players)]
+        "teams": _serialize_teams(),
+        "players_remaining": _serialize_remaining_players(),
+        "players_sold": _serialize_sold_players(),
+        "meta": {"player_pool_size": _player_pool_size()},
     }
 
 
 @app.get("/state/teams")
 async def get_teams():
-    return _stub_teams()
+    return _serialize_teams()
 
 
 @app.get("/state/players/remaining")
 async def get_remaining_players():
-    return _stub_remaining_players()
+    return _serialize_remaining_players()
 
 
 @app.get("/state/players/sold")
 async def get_sold_players():
-    return _stub_sold_players()
+    return _serialize_sold_players()
 
 
 @app.get("/state/summary")
