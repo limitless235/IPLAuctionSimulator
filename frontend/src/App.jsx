@@ -507,7 +507,7 @@ export default function App() {
               </div>
               <div ref={feedRef} style={{ flex: 1, overflowY: "auto", padding: "0 16px 16px" }}>
                 {feed.length === 0 && <div style={{ color: "#334155", fontSize: 12, paddingTop: 8 }}>Feed will appear here…</div>}
-                {feed.map((item, i) => <FeedItem key={i} item={item} />)}
+                {feed.slice(0, 50).map((item, i) => <FeedItem key={i} item={item} />)}
               </div>
             </div>
           </div>
