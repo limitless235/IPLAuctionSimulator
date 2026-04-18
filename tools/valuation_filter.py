@@ -11,7 +11,87 @@ class ValuationFilter:
         self.personality = personality
         self.scarcity_index = scarcity_index
 
-    def calculate_max_price(self) -> int:
+
+    @staticmethod
+    def compute_scarcity_multiplier(role: str, state) -> float:
+        remaining = [p for p in state.unsold_players if p.role == role]
+        count = len(remaining)
+        if count == 1:
+            return 2.0
+        elif count <= 3:
+            return 1.7
+        elif count <= 6:
+            return 1.4
+        return 1.0
+
+    @staticmethod
+    def compute_budget_reservation(state, team: Team) -> int:
+        needed = max(0, 15 - team.squad_size)
+        if needed == 0:
+            return 0
+            
+        remaining_pool = state.unsold_players
+        if not remaining_pool:
+            return 0
+            
+        avg_cost = sum(p.base_price for p in remaining_pool) / len(remaining_pool)
+        return int(needed * avg_cost)
+
+    def compute_specialist_need(self, player: Player, team: Team) -> float:
+        """Returns a multiplier 0.7-1.5 based on how many specialist_tags fill a gap."""
+        if not player.specialist_tags:
+            return 1.0
+            
+        if "bits-and-pieces" in player.specialist_tags:
+            return 0.7  # Impact Player rule penalty
+            
+        # Priority mapping based on team personality
+        priority_tags = set()
+        if self.personality.get("pace_bias", 0.5) > 0.8:
+            priority_tags.update(["pace-powerplay", "pace-death", "pace-middle", "swing"])
+        if self.personality.get("spin_bias", 0.5) > 0.8:
+            priority_tags.update(["wrist-spin", "finger-spin"])
+        if self.personality.get("allrounder_bias", 0.5) > 0.8:
+            priority_tags.update(["batting-allrounder", "bowling-allrounder"])
+        if self.personality.get("aggression", 0.5) > 0.8:
+            priority_tags.update(["finisher", "hard-hitting"])
+
+        multipliers = []
+        for tag in player.specialist_tags:
+            # Check team roster for this tag
+            # We need to scan team.players and team.retained_players
+            all_team_players = team.players + team.retained_players
+            tag_count = sum(1 for p in all_team_players if tag in p.specialist_tags)
+            
+            if tag_count >= 2:
+                multipliers.append(0.8) # Redundancy penalty
+            elif tag_count == 0:
+                if tag in priority_tags:
+                    multipliers.append(1.4) # Priority bonus
+                else:
+                    multipliers.append(1.2) # General gap bonus
+            else:
+                multipliers.append(1.0) # Neutral
+                
+        if not multipliers:
+            return 1.0
+        return max(0.7, min(1.5, sum(multipliers) / len(multipliers)))
+
+    def compute_overseas_penalty(self, player: Player, team: Team) -> float:
+        """Calculates penalty/bonus for overseas players based on current starters."""
+        if player.nationality == "indian":
+            return 1.0
+            
+        xi_count = team.overseas_xi_count()
+        if xi_count >= 4:
+            return 0.2  # Team already has 4 overseas starters
+        elif xi_count == 3:
+            return 0.85 # One more slot, slight caution
+        elif xi_count < 3:
+            return 1.1  # Team needs overseas quality
+        return 1.0
+
+    def calculate_max_price(self, state=None) -> int:
         # Tier-based market valuation
         tier_base = {1: 55000000, 2: 30000000, 3: 15000000, 4: 5000000}
         base_val = tier_base.get(self.player.tier, 30000000)
@@ -25,13 +105,26 @@ class ValuationFilter:
         form_multiplier = 0.7 + (self.player.recent_form * 0.6)
         base_val = int(base_val * form_multiplier)
 
-        # Youth bias
+        # Youth and Hype bias
         if self.player.is_youth or self.player.age < 23:
-            base_val += int(self.personality["youth_bias"] * 30000000)
+            youth_base = int(self.personality["youth_bias"] * 30000000)
+            # Add hype multiplier if applicable
+            if self.player.tier <= 2:
+                hype_multiplier = 1.0 + (self.player.hype_score * self.personality.get("youth_bias", 0.3) * 1.8)
+                youth_base = int(youth_base * hype_multiplier)
+            base_val += youth_base
 
         # Veteran bias
         if self.player.age > 30:
             base_val += int(self.personality["veteran_bias"] * 20000000)
+
+        # Specialist need multiplier
+        specialist_mult = self.compute_specialist_need(self.player, self.team)
+        base_val = int(base_val * specialist_mult)
+
+        # Overseas penalty/bonus
+        overseas_mult = self.compute_overseas_penalty(self.player, self.team)
+        base_val = int(base_val * overseas_mult)
 
         # Pace and spin bias
         if self.player.pace_bowler:
@@ -42,11 +135,6 @@ class ValuationFilter:
         # Allrounder bias
         if self.player.role == "all_rounder":
             base_val += int(self.personality["allrounder_bias"] * 25000000)
-
-        # Overseas value bias
-        if self.player.nationality == "overseas":
-            base_val += int(self.personality["value_foreign_bias"] * 20000000)
-            base_val += int(self.personality["foreign_bias"] * 15000000)
 
         # Scarcity adjustment
         if self.scarcity_index < 0.4:
@@ -66,25 +154,20 @@ class ValuationFilter:
         tier_multiplier = {1: 4.5, 2: 3.0, 3: 1.8, 4: 1.2}
         multiplier = tier_multiplier.get(self.player.tier, 2.0)
         
-        # Generational Player Premium - allows teams to momentarily shatter mathematical ceilings 
-        # to bid historic, record-breaking amounts on iconic franchise-defining superstars.
         if self.player.brand_value >= 0.85:
-            multiplier *= 1.8  # e.g., 4.5 -> 8.1
+            multiplier *= 1.8
         elif self.player.is_star or self.player.brand_value >= 0.7:
-            multiplier *= 1.4  # e.g., 4.5 -> 6.3
+            multiplier *= 1.4
             
-        # Impact Player Rule Reality
+        # Impact Player Rule Reality (redundant now with specialist_need but kept for safety)
         if self.player.role == "all_rounder" and not self.player.is_star and self.player.brand_value < 0.7:
-            # Drastically slash the budget multiplier for average all-rounders
             multiplier *= 0.4
             
         max_price = min(max_price, int(avg_slot_budget * multiplier * self.personality["price_tolerance"]))
 
         # Hard cap at price_tolerance * remaining_budget
-        # Cap at 29% of remaining budget for any single player
         conservatism_factor = 1.0 - (self.personality["budget_conservatism"] * 0.15)
         
-        # Ignore conservatism and push absolute limit if extremely desperate
         if self.scarcity_index < 0.25:
             desperation = self.personality["scarcity_sensitivity"] * 0.4
             conservatism_factor = min(1.5, conservatism_factor + desperation)
@@ -92,19 +175,15 @@ class ValuationFilter:
         max_price = min(max_price, int(avg_slot_budget * multiplier * self.personality["price_tolerance"] * conservatism_factor))
 
         import random
-        # Add realistic minor variance (+/- 5%) to max bid ceilings, representing 
-        # small boardroom disagreements during high-stakes bidding wars.
         jitter = random.uniform(0.95, 1.05)
         max_price = int(max_price * jitter)
 
-        # Prevent false auto-pass on extremely empty squads that can afford base price
         if self.team.squad_size < 15:
             max_price = max(max_price, self.player.base_price)
 
         return max_price
 
     def _get_squad_need_score(self) -> float:
-    # Simple check — does team have any of this role yet
         role_count = self.team.roles_count.get(self.player.role, 0)
         if role_count == 0:
             return 1.0
@@ -115,44 +194,35 @@ class ValuationFilter:
     def get_budget_pressure(self) -> float:
         return self.team.remaining_budget / float(self.team.total_budget)
 
-    def should_auto_pass(self, current_bid: int) -> bool:
+    def should_auto_pass(self, current_bid: int, max_price_override: int = None) -> bool:
         # Overseas slot check
         if self.player.nationality == "overseas":
-            if self.team.overseas_slots_used >= 4:
+            if self.team.overseas_slots_used >= 8: # IPL allows 8 in squad
                 return True
-        # Softened hard stop to allow teams to hoard steals while maintaining baseline balance
+                
+        # Role limits
         role_limits = {"batter": 9, "bowler": 9, "all_rounder": 8, "wicket_keeper": 4}
         limit = role_limits.get(self.player.role, 6)
         if self.team.roles_count.get(self.player.role, 0) >= limit:
-            return True
+            if not self.player.is_star and self.player.brand_value < 0.85:
+                return True
 
-        # Squad full
         if self.team.squad_size >= self.team.max_squad_size:
             return True
 
-        # No budget for next bid
         from engine.auction_engine import get_next_bid
         next_bid = get_next_bid(current_bid)
         
-        # Mathematical Budget Reserve check to guarantee playing 15
         MIN_BASE_PRICE = 2000000
         slots_to_minimum = max(0, 15 - (self.team.squad_size + 1))
         required_reserve = slots_to_minimum * MIN_BASE_PRICE
         if next_bid > (self.team.remaining_budget - required_reserve):
             return True
 
-        # Budget pressure scaling
-        pressure = self.get_budget_pressure()
-        risk_aversion = self.personality["risk_aversion"]
-        if pressure < 0.4:
-            risk_aversion = min(1.0, risk_aversion * 1.3)
-
-        # Max price check
-        max_price = self.calculate_max_price()
+        max_price = max_price_override if max_price_override is not None else self.calculate_max_price()
         
-        # Critical role desperation
         if self.team.squad_size >= 6 and self.team.roles_count.get(self.player.role, 0) == 0:
-            return False # Bypass max_price check, we desperately need this role!
+            return Fal
 
         if current_bid > max_price:
             return True

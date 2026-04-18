@@ -71,6 +71,25 @@ class AuctionOrchestrator:
                 continue
 
             if len(active) == 1 and state.highest_bidder == active[0]:
+                # --- NEW RTM LOGIC ---
+                rtm_team_id = state.rtm_history.get(player.name)
+                if rtm_team_id and rtm_team_id != state.highest_bidder:
+                    rtm_agent = self.team_agents.get(rtm_team_id)
+                    if rtm_agent and rtm_agent.should_invoke_rtm(player, current_bid, state):
+                        print(f"!!! RTM EXERCISED !!! {rtm_team_id} uses RTM to steal {player.name} for {current_bid}.")
+                        rtm_agent.team.rtm_cards -= 1
+                        state.highest_bidder = rtm_team_id
+                        if self.broadcast_cb:
+                            self.broadcast_cb({
+                                "type": "rtm_exercised",
+                                "player": player.name,
+                                "team": rtm_team_id,
+                                "price": round(current_bid / 100000),
+                                "text": f"🃏 RTM EXERCISED! {rtm_team_id} steals {player.name} for ₹{round(current_bid / 100000)}L",
+                                "event_type": "sold"
+                            })
+                # ---------------------
+                
                 print(f"[SOLD] {player.name} sold to {state.highest_bidder} for {current_bid}.")
                 if self.broadcast_cb:
                     self.broadcast_cb({
@@ -136,10 +155,31 @@ class AuctionOrchestrator:
                     scarcity, 
                     auction_progress,
                     active_bidders=active,
-                    rivalry_memory=self.memory.rivalry_memory
+                    rivalry_memory=self.memory.rivalry_memory,
+                    state=state
                 )
+                
+                # Check for purse bullying override if decision was PASS
+                if decision.decision == "PASS" and agent.should_price_drive(player, state.current_bid, state):
+                    drive_bid = agent.compute_drive_bid(player, state.current_bid, state)
+                    from engine.auction_engine import get_next_bid
+                    if drive_bid >= get_next_bid(state.current_bid):
+                        decision.decision = "BID"
+                        decision.amount = drive_bid
+                        self._log_test(test_mode, f"STRATEGIC PRICE DRIVE {current_team_id}", f"Driving price to {drive_bid}")
+                        
+                        # Add to memory tracking
+                        if not hasattr(self.memory, 'price_drive_events'):
+                            self.memory.price_drive_events = []
+                        self.memory.price_drive_events.append({
+                            "driver": current_team_id,
+                            "target_rival": getattr(agent, "target_rival_cache", "Unknown"),
+                            "player": player.name,
+                            "amount": drive_bid
+                        })
+
                 self._log_test(test_mode, f"LLM Decision {current_team_id}", str(decision))
-                self._apply_and_retry(current_team_id, decision.decision, test_mode)
+                self._apply_and_retry(current_team_id, decision.decision, test_mode, amount=getattr(decision, 'amount', None))
 
     def _apply_and_retry(self, team_id: str, decision: str, test_mode: bool, amount: int = None):
         action_payload = {

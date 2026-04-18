@@ -60,9 +60,134 @@ class TeamAgent:
         """How many more players does this team need to reach min_squad_size."""
         return max(1, self.team.min_squad_size - self.team.squad_size)
 
+    def scan_upcoming_queue(self, role: str, state) -> dict:
+        result = {"better_player_upcoming": False, "better_player_base_price": 0, "scarcity": 0}
+        upcoming_role_players = [p for p in state.unsold_players if p.role == role]
+        result["scarcity"] = len(upcoming_role_players)
+        
+        # Current player stats
+        current_player = state.current_player
+        
+        for p in upcoming_role_players:
+            # We consider a player "better" if they have a stronger tier or higher brand value
+            if p.tier < current_player.tier or (p.tier == current_player.tier and p.brand_value > current_player.brand_value):
+                result["better_player_upcoming"] = True
+                result["better_player_base_price"] = p.base_price
+                break
+                
+        return result
+
+    def compute_valuation(self, player: Player, state) -> float:
+        # Base valuation from existing filter
+        scarcity = 1.0
+        filter_tool = ValuationFilter(self.team, player, self.personality, scarcity)
+        
+        # Calculate per-team hype noise (Step 4 of Hype requirement)
+        import hashlib
+        import random
+        seed_str = f"{self.team.name}_{player.id}"
+        seed = int(hashlib.md5(seed_str.encode()).hexdigest(), 16) % 1000000
+        team_rng = random.Random(seed)
+        team_specific_noise = team_rng.uniform(0, 0.1)
+        
+        # Temporarily inject noise into player for this team's calculation
+        original_hype = player.hype_score
+        player.hype_score = min(1.0, original_hype + team_specific_noise)
+        
+        base_valuation = filter_tool.calculate_max_price()
+        
+        # Restore original hype score
+        player.hype_score = original_hype
+
+        # Apply Task 2 Lookahead Enhancements
+        scarcity_multiplier = ValuationFilter.compute_scarcity_multiplier(player.role, state)
+        base_valuation = int(base_valuation * scarcity_multiplier)
+        
+        reserve = ValuationFilter.compute_budget_reservation(state, self.team)
+        effective_budget = max(0, self.team.remaining_budget - reserve)
+        base_valuation = min(base_valuation, effective_budget)
+        
+        queue_info = self.scan_upcoming_queue(player.role, state)
+        if queue_info["better_player_upcoming"] and queue_info["better_player_base_price"] < self.team.remaining_budget * 0.35:
+            base_valuation = int(base_valuation * 0.75) # Patience discount
+            
+        return base_valuation
+
+    def should_invoke_rtm(self, player: Player, current_bid: int, state) -> bool:
+        if self.team.rtm_cards <= 0:
+            return False
+            
+        if state.rtm_history.get(player.name) != self.team.id:
+            return False
+            
+        valuation = self.compute_valuation(player, state)
+        if current_bid <= valuation * 1.1:
+            MIN_BASE_PRICE = 2000000
+            slots_to_minimum = max(0, 15 - (self.team.squad_size + 1))
+            required_reserve = slots_to_minimum * MIN_BASE_PRICE
+            if current_bid <= (self.team.remaining_budget - required_reserve):
+                return True
+        return False
+
+    def should_price_drive(self, player: Player, current_bid: int, state) -> bool:
+        if self.personality.get("aggression", 0.5) <= 0.6:
+            return False
+            
+        if self.team.remaining_budget <= current_bid * 3:
+            return False
+            
+        valuation = self.compute_valuation(player, state)
+        if valuation >= current_bid:
+            return False # We actually want them, so it's not a fake drive
+            
+        remaining_in_role = len([p for p in state.unsold_players if p.role == player.role])
+        if remaining_in_role >= 3:
+            return False # Not scarce enough to burn rivals over
+            
+        rivals = self.personality.get("rivalry_teams", [])
+        for r_id in rivals:
+            rival_team = state.teams.get(r_id)
+            if rival_team and r_id in state.active_bidders:
+                if rival_team.remaining_budget < current_bid * 2:
+                    return True
+        return False
+
+    def compute_drive_bid(self, player: Player, current_bid: int, state) -> int:
+        target_rival = None
+        lowest_budget = float('inf')
+        
+        rivals = self.personality.get("rivalry_teams", [])
+        for r_id in rivals:
+            rival_team = state.teams.get(r_id)
+            if rival_team and r_id in state.active_bidders:
+                if rival_team.remaining_budget < lowest_budget:
+                    lowest_budget = rival_team.remaining_budget
+                    target_rival = rival_team
+                    
+        if not target_rival:
+            return current_bid
+            
+        # Drive the price to exactly rival's max limit - 25L, rounded down
+        from engine.auction_engine import get_next_bid
+        
+        target_price = target_rival.remaining_budget - 2500000
+        max_own_risk = int(self.team.remaining_budget * 0.15)
+        
+        drive_limit = min(target_price, max_own_risk)
+        
+        # Find highest valid increment below drive_limit
+        simulated_bid = current_bid
+        while True:
+            next_b = get_next_bid(simulated_bid)
+            if next_b > drive_limit:
+                break
+            simulated_bid = next_b
+            
+        return simulated_bid
+
     def make_decision(self, player: Player, current_bid: int,
                       scarcity_index: float, auction_progress: float = 0.5,
-                      active_bidders: list = None, rivalry_memory: dict = None) -> AgentDecision:
+                      active_bidders: list = None, rivalry_memory: dict = None, state=None) -> AgentDecision:
         from engine.auction_engine import get_next_bid
 
         next_bid = get_next_bid(current_bid)
@@ -75,13 +200,19 @@ class TeamAgent:
         if player.nationality == "overseas" and self.team.overseas_slots_used >= 4:
             return AgentDecision(decision="PASS")
 
-        # Blueprint hard stop — if role is full, never bid
+        # Blueprint hard stop — if role is full, never bid (unless they are a massive superstar)
         if self.is_role_full(player.role):
-            return AgentDecision(decision="PASS")
+            if not player.is_star and player.brand_value < 0.85:
+                return AgentDecision(decision="PASS")
 
         # Valuation filter
         filter_tool = ValuationFilter(self.team, player, self.personality, scarcity_index)
-        if filter_tool.should_auto_pass(current_bid):
+        
+        max_price_override = None
+        if state is not None:
+            max_price_override = self.compute_valuation(player, state)
+            
+        if filter_tool.should_auto_pass(current_bid, max_price_override=max_price_override):
             return AgentDecision(decision="PASS")
 
         # Base score

@@ -1,5 +1,24 @@
 [
     {
+        "id": "p000000",
+        "name": "Rohit Sharma",
+        "nationality": "indian",
+        "role": "batter",
+        "base_price": 20000000,
+        "brand_value": 0.99,
+        "is_capped": true,
+        "is_star": true,
+        "is_youth": false,
+        "specialist_tag": "opener",
+        "pace_bowler": false,
+        "spin_bowler": false,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "hard-hitting"
+        ],
+        "hype_score": 0.09
+    },
+    {
         "id": "p1",
         "name": "MS Dhoni",
         "role": "wicket_keeper",
@@ -14,7 +33,17 @@
         "ipl_experience": 16,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.1,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "finisher",
+            "keeper-lower"
+        ],
+        "hype_score": 0.22
     },
     {
         "id": "p2",
@@ -31,7 +60,17 @@
         "ipl_experience": 0,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.7,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p3",
@@ -48,7 +87,16 @@
         "ipl_experience": 4,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.4,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p4",
@@ -65,7 +113,17 @@
         "ipl_experience": 6,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.6,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting"
+        ],
+        "hype_score": 0.29
     },
     {
         "id": "p5",
@@ -82,7 +140,16 @@
         "ipl_experience": 1,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.85,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p6",
@@ -99,7 +166,16 @@
         "ipl_experience": 0,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.8,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p7",
@@ -116,7 +192,16 @@
         "ipl_experience": 9,
         "specialist_tag": "powerplay",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.3,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p8",
@@ -133,7 +218,19 @@
         "ipl_experience": 8,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.5,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "pace-powerplay",
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.28
     },
     {
         "id": "p9",
@@ -150,7 +247,20 @@
         "ipl_experience": 16,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "bowling-allrounder",
+            "hard-hitting",
+            "finger-spin",
+            "batting-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.25
     },
     {
         "id": "p10",
@@ -167,7 +277,19 @@
         "ipl_experience": 10,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.1,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p11",
@@ -184,7 +306,19 @@
         "ipl_experience": 9,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p12",
@@ -201,7 +335,19 @@
         "ipl_experience": 1,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.85,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p13",
@@ -218,7 +364,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.6,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "batting-allrounder",
+            "top-order",
+            "bowling-allrounder",
+            "finger-spin"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p14",
@@ -235,7 +393,17 @@
         "ipl_experience": 16,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "bowling-allrounder",
+            "finger-spin"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p15",
@@ -252,7 +420,20 @@
         "ipl_experience": 6,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.4,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "bowling-allrounder",
+            "swing",
+            "pace-powerplay",
+            "middle-order",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.1
     },
     {
         "id": "p16",
@@ -269,7 +450,17 @@
         "ipl_experience": 5,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "pace-middle",
+            "bowling-allrounder"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p17",
@@ -286,7 +477,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.6,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p18",
@@ -303,7 +506,16 @@
         "ipl_experience": 3,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.95,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.28
     },
     {
         "id": "p19",
@@ -320,7 +532,16 @@
         "ipl_experience": 3,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p20",
@@ -337,7 +558,16 @@
         "ipl_experience": 4,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p21",
@@ -354,7 +584,16 @@
         "ipl_experience": 0,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.75,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p22",
@@ -371,7 +610,16 @@
         "ipl_experience": 3,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.9,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p23",
@@ -388,7 +636,16 @@
         "ipl_experience": 7,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p24",
@@ -405,7 +662,16 @@
         "ipl_experience": 8,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "CSK",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p25",
@@ -422,7 +688,16 @@
         "ipl_experience": 2,
         "specialist_tag": "powerplay",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.7,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p26",
@@ -439,7 +714,16 @@
         "ipl_experience": 2,
         "specialist_tag": "powerplay",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.95,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.27
     },
     {
         "id": "p27",
@@ -456,7 +740,17 @@
         "ipl_experience": 15,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.1,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p28",
@@ -473,7 +767,17 @@
         "ipl_experience": 3,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.85,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "finisher",
+            "keeper-lower"
+        ],
+        "hype_score": 0.15
     },
     {
         "id": "p29",
@@ -490,7 +794,17 @@
         "ipl_experience": 3,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.75,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p30",
@@ -507,7 +821,17 @@
         "ipl_experience": 12,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.2,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p31",
@@ -524,7 +848,17 @@
         "ipl_experience": 2,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.6,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "finisher",
+            "keeper-lower"
+        ],
+        "hype_score": 0.18
     },
     {
         "id": "p32",
@@ -541,7 +875,20 @@
         "ipl_experience": 11,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.3,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "bowling-allrounder",
+            "hard-hitting",
+            "finger-spin",
+            "middle-order",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.3
     },
     {
         "id": "p33",
@@ -558,7 +905,16 @@
         "ipl_experience": 1,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.95,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.18
     },
     {
         "id": "p34",
@@ -575,7 +931,16 @@
         "ipl_experience": 3,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.9,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p35",
@@ -592,7 +957,19 @@
         "ipl_experience": 3,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p36",
@@ -609,7 +986,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "batting-allrounder",
+            "wrist-spin",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p37",
@@ -626,7 +1015,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.3,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p38",
@@ -643,7 +1044,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p39",
@@ -660,7 +1073,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.7,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p40",
@@ -677,7 +1102,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.5,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p41",
@@ -694,7 +1131,16 @@
         "ipl_experience": 10,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.4
     },
     {
         "id": "p42",
@@ -711,7 +1157,16 @@
         "ipl_experience": 5,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p43",
@@ -728,7 +1183,17 @@
         "ipl_experience": 9,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.16
     },
     {
         "id": "p44",
@@ -745,7 +1210,16 @@
         "ipl_experience": 12,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p45",
@@ -762,7 +1236,16 @@
         "ipl_experience": 7,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p46",
@@ -779,7 +1262,16 @@
         "ipl_experience": 5,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "DC",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p47",
@@ -796,7 +1288,17 @@
         "ipl_experience": 7,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.2,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting"
+        ],
+        "hype_score": 0.25
     },
     {
         "id": "p48",
@@ -813,7 +1315,16 @@
         "ipl_experience": 4,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.8,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.29
     },
     {
         "id": "p49",
@@ -830,7 +1341,16 @@
         "ipl_experience": 5,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.22
     },
     {
         "id": "p50",
@@ -847,7 +1367,17 @@
         "ipl_experience": 0,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.85,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p51",
@@ -864,7 +1394,17 @@
         "ipl_experience": 5,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.3,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p52",
@@ -881,7 +1421,17 @@
         "ipl_experience": 10,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.1,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.29
     },
     {
         "id": "p53",
@@ -898,7 +1448,20 @@
         "ipl_experience": 9,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "wrist-spin",
+            "hard-hitting",
+            "bowling-allrounder",
+            "batting-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.4
     },
     {
         "id": "p54",
@@ -915,7 +1478,19 @@
         "ipl_experience": 10,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "wrist-spin",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.18
     },
     {
         "id": "p55",
@@ -932,7 +1507,16 @@
         "ipl_experience": 6,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.85,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.18
     },
     {
         "id": "p56",
@@ -949,7 +1533,19 @@
         "ipl_experience": 1,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.75,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p57",
@@ -966,7 +1562,19 @@
         "ipl_experience": 4,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.4,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p58",
@@ -983,7 +1591,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.6,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p59",
@@ -1000,7 +1620,19 @@
         "ipl_experience": 9,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.1,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p60",
@@ -1017,7 +1649,19 @@
         "ipl_experience": 3,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.5,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p61",
@@ -1034,7 +1678,19 @@
         "ipl_experience": 4,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.3,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p62",
@@ -1051,7 +1707,19 @@
         "ipl_experience": 6,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.4,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p63",
@@ -1068,7 +1736,19 @@
         "ipl_experience": 8,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.3,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "top-order",
+            "bowling-allrounder",
+            "finger-spin"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p64",
@@ -1085,7 +1765,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.4,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p65",
@@ -1102,7 +1794,16 @@
         "ipl_experience": 1,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "None",
+        "scout_hype": 0.8,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "finger-spin"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p66",
@@ -1119,7 +1820,16 @@
         "ipl_experience": 2,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.0
     },
     {
         "id": "p67",
@@ -1136,7 +1846,17 @@
         "ipl_experience": 16,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "swing",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p68",
@@ -1153,7 +1873,17 @@
         "ipl_experience": 8,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.41
     },
     {
         "id": "p69",
@@ -1170,7 +1900,16 @@
         "ipl_experience": 6,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.1
     },
     {
         "id": "p70",
@@ -1187,7 +1926,17 @@
         "ipl_experience": 9,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.39
     },
     {
         "id": "p71",
@@ -1204,7 +1953,16 @@
         "ipl_experience": 5,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p72",
@@ -1221,7 +1979,16 @@
         "ipl_experience": 7,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.8,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.4
     },
     {
         "id": "p73",
@@ -1238,7 +2005,16 @@
         "ipl_experience": 1,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.85,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p74",
@@ -1255,7 +2031,16 @@
         "ipl_experience": 15,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.1,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p75",
@@ -1272,7 +2057,16 @@
         "ipl_experience": 16,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.1,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p76",
@@ -1289,7 +2083,17 @@
         "ipl_experience": 11,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.2,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p77",
@@ -1306,7 +2110,17 @@
         "ipl_experience": 4,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.6,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p78",
@@ -1323,7 +2137,17 @@
         "ipl_experience": 1,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p79",
@@ -1340,7 +2164,20 @@
         "ipl_experience": 14,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.1,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "top-order",
+            "bowling-allrounder",
+            "hard-hitting",
+            "finger-spin",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.3
     },
     {
         "id": "p80",
@@ -1357,7 +2194,21 @@
         "ipl_experience": 13,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.1,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "hard-hitting",
+            "bowling-allrounder",
+            "pace-death",
+            "swing",
+            "batting-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p81",
@@ -1374,7 +2225,19 @@
         "ipl_experience": 5,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.85,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p82",
@@ -1391,7 +2254,19 @@
         "ipl_experience": 6,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p83",
@@ -1408,7 +2283,21 @@
         "ipl_experience": 5,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "hard-hitting",
+            "bowling-allrounder",
+            "pace-death",
+            "swing",
+            "middle-order",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.22
     },
     {
         "id": "p84",
@@ -1425,7 +2314,19 @@
         "ipl_experience": 6,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.3,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "finger-spin"
+        ],
+        "hype_score": 0.25
     },
     {
         "id": "p85",
@@ -1442,7 +2343,20 @@
         "ipl_experience": 10,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.1,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "bowling-allrounder",
+            "hard-hitting",
+            "finger-spin",
+            "middle-order",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.1
     },
     {
         "id": "p86",
@@ -1459,7 +2373,16 @@
         "ipl_experience": 6,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.44
     },
     {
         "id": "p87",
@@ -1476,7 +2399,16 @@
         "ipl_experience": 3,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.9,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p88",
@@ -1493,7 +2425,16 @@
         "ipl_experience": 4,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p89",
@@ -1510,7 +2451,16 @@
         "ipl_experience": 6,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.15
     },
     {
         "id": "p90",
@@ -1527,7 +2477,17 @@
         "ipl_experience": 7,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p91",
@@ -1544,7 +2504,16 @@
         "ipl_experience": 2,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p92",
@@ -1561,7 +2530,16 @@
         "ipl_experience": 4,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.7,
+        "previous_team": "KKR",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p93",
@@ -1578,7 +2556,16 @@
         "ipl_experience": 7,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.3,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p94",
@@ -1595,7 +2582,17 @@
         "ipl_experience": 12,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "hard-hitting",
+            "finisher"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p95",
@@ -1612,7 +2609,16 @@
         "ipl_experience": 2,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.4,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.0
     },
     {
         "id": "p96",
@@ -1629,7 +2635,16 @@
         "ipl_experience": 4,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.75,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p97",
@@ -1646,7 +2661,17 @@
         "ipl_experience": 10,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.3,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p98",
@@ -1663,7 +2688,17 @@
         "ipl_experience": 2,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.65,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p99",
@@ -1680,7 +2715,17 @@
         "ipl_experience": 10,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p100",
@@ -1697,7 +2742,19 @@
         "ipl_experience": 7,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "finger-spin"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p101",
@@ -1714,7 +2771,16 @@
         "ipl_experience": 5,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.6,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.22
     },
     {
         "id": "p102",
@@ -1731,7 +2797,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p103",
@@ -1748,7 +2826,21 @@
         "ipl_experience": 10,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.2,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting",
+            "bowling-allrounder",
+            "pace-death",
+            "swing",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p104",
@@ -1765,7 +2857,19 @@
         "ipl_experience": 1,
         "specialist_tag": "utility",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.85,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "batting-allrounder",
+            "top-order",
+            "pace-middle",
+            "bowling-allrounder"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p105",
@@ -1782,7 +2886,19 @@
         "ipl_experience": 3,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.7,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.15
     },
     {
         "id": "p106",
@@ -1799,7 +2915,16 @@
         "ipl_experience": 6,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.43
     },
     {
         "id": "p107",
@@ -1816,7 +2941,16 @@
         "ipl_experience": 2,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.95,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.54
     },
     {
         "id": "p108",
@@ -1833,7 +2967,16 @@
         "ipl_experience": 5,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p109",
@@ -1850,7 +2993,16 @@
         "ipl_experience": 4,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p110",
@@ -1867,7 +3019,16 @@
         "ipl_experience": 3,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p111",
@@ -1884,7 +3045,16 @@
         "ipl_experience": 1,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "None",
+        "scout_hype": 0.7,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "finger-spin"
+        ],
+        "hype_score": 0.0
     },
     {
         "id": "p112",
@@ -1901,7 +3071,16 @@
         "ipl_experience": 0,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p113",
@@ -1918,7 +3097,16 @@
         "ipl_experience": 2,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.8,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.0
     },
     {
         "id": "p114",
@@ -1935,7 +3123,17 @@
         "ipl_experience": 7,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "swing",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p115",
@@ -1952,7 +3150,16 @@
         "ipl_experience": 0,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "LSG",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.1
     },
     {
         "id": "p116",
@@ -1969,7 +3176,17 @@
         "ipl_experience": 11,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.42
     },
     {
         "id": "p117",
@@ -1986,7 +3203,17 @@
         "ipl_experience": 11,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.1,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "hard-hitting",
+            "middle-order"
+        ],
+        "hype_score": 0.27
     },
     {
         "id": "p118",
@@ -2003,7 +3230,16 @@
         "ipl_experience": 4,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.8,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.51
     },
     {
         "id": "p119",
@@ -2020,7 +3256,16 @@
         "ipl_experience": 0,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.5,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p120",
@@ -2037,7 +3282,17 @@
         "ipl_experience": 3,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.4,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p121",
@@ -2054,7 +3309,17 @@
         "ipl_experience": 1,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.85,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "finisher",
+            "keeper-lower"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p122",
@@ -2071,7 +3336,17 @@
         "ipl_experience": 0,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p123",
@@ -2088,7 +3363,21 @@
         "ipl_experience": 12,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.1,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "hard-hitting",
+            "bowling-allrounder",
+            "pace-death",
+            "swing",
+            "batting-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.22
     },
     {
         "id": "p124",
@@ -2105,7 +3394,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.75,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p125",
@@ -2122,7 +3423,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.8,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p126",
@@ -2139,7 +3452,19 @@
         "ipl_experience": 3,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.5,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "batting-allrounder",
+            "top-order",
+            "bowling-allrounder",
+            "finger-spin"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p127",
@@ -2156,7 +3481,19 @@
         "ipl_experience": 9,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "finger-spin"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p128",
@@ -2173,7 +3510,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.65,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p129",
@@ -2190,7 +3539,16 @@
         "ipl_experience": 1,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p130",
@@ -2207,7 +3565,16 @@
         "ipl_experience": 1,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "None",
+        "scout_hype": 0.85,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "finger-spin"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p131",
@@ -2224,7 +3591,16 @@
         "ipl_experience": 6,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p132",
@@ -2241,7 +3617,16 @@
         "ipl_experience": 14,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.16
     },
     {
         "id": "p133",
@@ -2258,7 +3643,17 @@
         "ipl_experience": 12,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.37
     },
     {
         "id": "p134",
@@ -2275,7 +3670,18 @@
         "ipl_experience": 10,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "swing",
+            "pace-death",
+            "finisher"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p135",
@@ -2292,7 +3698,16 @@
         "ipl_experience": 0,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p136",
@@ -2309,7 +3724,16 @@
         "ipl_experience": 3,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.0
     },
     {
         "id": "p137",
@@ -2326,7 +3750,16 @@
         "ipl_experience": 3,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "MI",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p138",
@@ -2343,7 +3776,16 @@
         "ipl_experience": 0,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.9,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p139",
@@ -2360,7 +3802,16 @@
         "ipl_experience": 0,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p140",
@@ -2377,7 +3828,17 @@
         "ipl_experience": 6,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.75,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p141",
@@ -2394,7 +3855,17 @@
         "ipl_experience": 8,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "finisher",
+            "keeper-lower"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p142",
@@ -2411,7 +3882,17 @@
         "ipl_experience": 3,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.5,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p143",
@@ -2428,7 +3909,16 @@
         "ipl_experience": 8,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.85,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p144",
@@ -2445,7 +3935,19 @@
         "ipl_experience": 0,
         "specialist_tag": "utility",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p145",
@@ -2462,7 +3964,19 @@
         "ipl_experience": 7,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "finger-spin"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p146",
@@ -2479,7 +3993,20 @@
         "ipl_experience": 5,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.6,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "bowling-allrounder",
+            "swing",
+            "pace-powerplay",
+            "batting-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p147",
@@ -2496,7 +4023,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.5,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-powerplay",
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p148",
@@ -2513,7 +4052,19 @@
         "ipl_experience": 3,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.5,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-powerplay",
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p149",
@@ -2530,7 +4081,16 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.85,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p150",
@@ -2547,7 +4107,19 @@
         "ipl_experience": 5,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.3,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "batting-allrounder",
+            "wrist-spin",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.22
     },
     {
         "id": "p151",
@@ -2564,7 +4136,20 @@
         "ipl_experience": 14,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.1,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "bowling-allrounder",
+            "hard-hitting",
+            "finger-spin",
+            "middle-order",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.04
     },
     {
         "id": "p152",
@@ -2581,7 +4166,21 @@
         "ipl_experience": 11,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "hard-hitting",
+            "bowling-allrounder",
+            "pace-death",
+            "swing",
+            "middle-order",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.15
     },
     {
         "id": "p153",
@@ -2598,7 +4197,16 @@
         "ipl_experience": 4,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p154",
@@ -2615,7 +4223,16 @@
         "ipl_experience": 3,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.65,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p155",
@@ -2632,7 +4249,16 @@
         "ipl_experience": 5,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p156",
@@ -2649,7 +4275,16 @@
         "ipl_experience": 2,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p157",
@@ -2666,7 +4301,17 @@
         "ipl_experience": 7,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.38
     },
     {
         "id": "p158",
@@ -2683,7 +4328,16 @@
         "ipl_experience": 12,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.43
     },
     {
         "id": "p159",
@@ -2700,7 +4354,17 @@
         "ipl_experience": 8,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p160",
@@ -2717,7 +4381,17 @@
         "ipl_experience": 10,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "PBKS",
+        "specialist_tags": [
+            "hard-hitting",
+            "middle-order"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p161",
@@ -2734,7 +4408,17 @@
         "ipl_experience": 12,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.2,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p162",
@@ -2751,7 +4435,17 @@
         "ipl_experience": 5,
         "specialist_tag": "powerplay",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.6,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting"
+        ],
+        "hype_score": 0.53
     },
     {
         "id": "p163",
@@ -2768,7 +4462,17 @@
         "ipl_experience": 9,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "hard-hitting",
+            "finisher"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p164",
@@ -2785,7 +4489,16 @@
         "ipl_experience": 2,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.5,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.16
     },
     {
         "id": "p165",
@@ -2802,7 +4515,17 @@
         "ipl_experience": 4,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.8,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.29
     },
     {
         "id": "p166",
@@ -2819,7 +4542,17 @@
         "ipl_experience": 0,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p167",
@@ -2836,7 +4569,19 @@
         "ipl_experience": 6,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.8,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.29
     },
     {
         "id": "p168",
@@ -2853,7 +4598,16 @@
         "ipl_experience": 0,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.85,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p169",
@@ -2870,7 +4624,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.5,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p170",
@@ -2887,7 +4653,19 @@
         "ipl_experience": 11,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p171",
@@ -2904,7 +4682,16 @@
         "ipl_experience": 6,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p172",
@@ -2921,7 +4708,16 @@
         "ipl_experience": 3,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p173",
@@ -2938,7 +4734,16 @@
         "ipl_experience": 12,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p174",
@@ -2955,7 +4760,16 @@
         "ipl_experience": 4,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p175",
@@ -2972,7 +4786,16 @@
         "ipl_experience": 1,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.95,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p176",
@@ -2989,7 +4812,17 @@
         "ipl_experience": 7,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "wrist-spin",
+            "finisher"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p177",
@@ -3006,7 +4839,16 @@
         "ipl_experience": 6,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "finger-spin"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p178",
@@ -3023,7 +4865,16 @@
         "ipl_experience": 5,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.7,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p179",
@@ -3040,7 +4891,18 @@
         "ipl_experience": 9,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "swing",
+            "pace-death",
+            "finisher"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p180",
@@ -3057,7 +4919,16 @@
         "ipl_experience": 6,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.4,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.3
     },
     {
         "id": "p181",
@@ -3074,7 +4945,17 @@
         "ipl_experience": 17,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.1,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p182",
@@ -3091,7 +4972,16 @@
         "ipl_experience": 0,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.75,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.01
     },
     {
         "id": "p183",
@@ -3108,7 +4998,16 @@
         "ipl_experience": 7,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.4,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p184",
@@ -3125,7 +5024,17 @@
         "ipl_experience": 6,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "finisher",
+            "keeper-lower"
+        ],
+        "hype_score": 0.18
     },
     {
         "id": "p185",
@@ -3142,7 +5051,17 @@
         "ipl_experience": 5,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.5,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.26
     },
     {
         "id": "p186",
@@ -3159,7 +5078,19 @@
         "ipl_experience": 8,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "finger-spin"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p187",
@@ -3176,7 +5107,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.95,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p188",
@@ -3193,7 +5136,19 @@
         "ipl_experience": 5,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p189",
@@ -3210,7 +5165,20 @@
         "ipl_experience": 8,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.3,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "wrist-spin",
+            "hard-hitting",
+            "bowling-allrounder",
+            "middle-order",
+            "batting-allrounder"
+        ],
+        "hype_score": 0.39
     },
     {
         "id": "p190",
@@ -3227,7 +5195,19 @@
         "ipl_experience": 11,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p191",
@@ -3244,7 +5224,17 @@
         "ipl_experience": 7,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.4,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "hard-hitting",
+            "finisher"
+        ],
+        "hype_score": 0.43
     },
     {
         "id": "p192",
@@ -3261,7 +5251,19 @@
         "ipl_experience": 2,
         "specialist_tag": "utility",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.5,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p193",
@@ -3278,7 +5280,16 @@
         "ipl_experience": 2,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p194",
@@ -3295,7 +5306,16 @@
         "ipl_experience": 6,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.4,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p195",
@@ -3312,7 +5332,17 @@
         "ipl_experience": 8,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "swing",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.03
     },
     {
         "id": "p196",
@@ -3329,7 +5359,16 @@
         "ipl_experience": 4,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p197",
@@ -3346,7 +5385,16 @@
         "ipl_experience": 3,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.7,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p198",
@@ -3363,7 +5411,16 @@
         "ipl_experience": 4,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p199",
@@ -3380,7 +5437,17 @@
         "ipl_experience": 8,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.35
     },
     {
         "id": "p200",
@@ -3397,7 +5464,17 @@
         "ipl_experience": 14,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.25
     },
     {
         "id": "p201",
@@ -3414,7 +5491,16 @@
         "ipl_experience": 0,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "RCB",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.09
     },
     {
         "id": "p202",
@@ -3431,7 +5517,16 @@
         "ipl_experience": 4,
         "specialist_tag": "finisher",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "Finisher",
+        "scout_hype": 0.5,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "finisher"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p203",
@@ -3448,7 +5543,16 @@
         "ipl_experience": 3,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.6,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.02
     },
     {
         "id": "p204",
@@ -3465,7 +5569,16 @@
         "ipl_experience": 9,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "middle-order"
+        ],
+        "hype_score": 0.05
     },
     {
         "id": "p205",
@@ -3482,7 +5595,16 @@
         "ipl_experience": 0,
         "specialist_tag": "anchor",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.6,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "top-order"
+        ],
+        "hype_score": 0.0
     },
     {
         "id": "p206",
@@ -3499,7 +5621,17 @@
         "ipl_experience": 8,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.2,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "keeper-batter",
+            "middle-order"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p207",
@@ -3516,7 +5648,17 @@
         "ipl_experience": 10,
         "specialist_tag": "keeper_batter",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "None",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.3,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "keeper-batter",
+            "top-order"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p208",
@@ -3533,7 +5675,21 @@
         "ipl_experience": 10,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.1,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "hard-hitting",
+            "bowling-allrounder",
+            "pace-death",
+            "swing",
+            "batting-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.43
     },
     {
         "id": "p209",
@@ -3550,7 +5706,19 @@
         "ipl_experience": 3,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.95,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "batting-allrounder",
+            "pace-middle",
+            "bowling-allrounder",
+            "middle-order"
+        ],
+        "hype_score": 0.06
     },
     {
         "id": "p210",
@@ -3567,7 +5735,18 @@
         "ipl_experience": 7,
         "specialist_tag": "powerplay",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Left-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.7,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting",
+            "finger-spin"
+        ],
+        "hype_score": 0.21
     },
     {
         "id": "p211",
@@ -3584,7 +5763,17 @@
         "ipl_experience": 8,
         "specialist_tag": "powerplay",
         "pace_bowler": false,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Top-Order",
+        "scout_hype": 0.2,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "top-order",
+            "hard-hitting"
+        ],
+        "hype_score": 0.2
     },
     {
         "id": "p212",
@@ -3601,7 +5790,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.5,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "finisher",
+            "pace-powerplay"
+        ],
+        "hype_score": 0.17
     },
     {
         "id": "p213",
@@ -3618,7 +5819,19 @@
         "ipl_experience": 2,
         "specialist_tag": "allrounder_bat",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Left Hand",
+        "bowling_style": "Right-Arm Finger Spin",
+        "batting_position": "Middle-Order",
+        "scout_hype": 0.6,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "batting-allrounder",
+            "bowling-allrounder",
+            "middle-order",
+            "finger-spin"
+        ],
+        "hype_score": 0.0
     },
     {
         "id": "p214",
@@ -3635,7 +5848,21 @@
         "ipl_experience": 11,
         "specialist_tag": "allrounder_bowl",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "Finisher",
+        "scout_hype": 0.2,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "hard-hitting",
+            "bowling-allrounder",
+            "pace-death",
+            "swing",
+            "batting-allrounder",
+            "finisher"
+        ],
+        "hype_score": 0.18
     },
     {
         "id": "p215",
@@ -3652,7 +5879,16 @@
         "ipl_experience": 8,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.3,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.23
     },
     {
         "id": "p216",
@@ -3669,7 +5905,16 @@
         "ipl_experience": 13,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Left-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "pace-powerplay"
+        ],
+        "hype_score": 0.07
     },
     {
         "id": "p217",
@@ -3686,7 +5931,16 @@
         "ipl_experience": 4,
         "specialist_tag": "death_bowler",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.5,
+        "previous_team": "SRH",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.08
     },
     {
         "id": "p218",
@@ -3703,7 +5957,16 @@
         "ipl_experience": 0,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "unsold",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.24
     },
     {
         "id": "p219",
@@ -3720,7 +5983,17 @@
         "ipl_experience": 12,
         "specialist_tag": "powerplay",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.1,
+        "previous_team": "GT",
+        "specialist_tags": [
+            "pace-death",
+            "swing"
+        ],
+        "hype_score": 0.4
     },
     {
         "id": "p220",
@@ -3737,7 +6010,16 @@
         "ipl_experience": 8,
         "specialist_tag": "spinner",
         "pace_bowler": false,
-        "spin_bowler": true
+        "spin_bowler": true,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Wrist Spin",
+        "batting_position": "None",
+        "scout_hype": 0.2,
+        "previous_team": "RR",
+        "specialist_tags": [
+            "wrist-spin"
+        ],
+        "hype_score": 0.19
     },
     {
         "id": "p221",
@@ -3754,6 +6036,15 @@
         "ipl_experience": 1,
         "specialist_tag": "pace_spearhead",
         "pace_bowler": true,
-        "spin_bowler": false
+        "spin_bowler": false,
+        "batting_style": "Right Hand",
+        "bowling_style": "Right-Arm Pace",
+        "batting_position": "None",
+        "scout_hype": 0.6,
+        "previous_team": "unsold",
+        "specialist_tags": [
+            "pace-middle"
+        ],
+        "hype_score": 0.06
     }
 ]

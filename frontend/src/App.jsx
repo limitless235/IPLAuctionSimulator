@@ -67,6 +67,7 @@ function BudgetBar({ remaining, total }) {
 }
 
 function TeamCard({ team, isHuman, isHighBidder, isSelected, onClick }) {
+  const rtmCards = team.rtm_cards || 0;
   return (
     <div onClick={onClick} style={{
       background: isSelected ? "rgba(255,255,255,0.1)" : isHuman ? "rgba(99,102,241,0.12)" : "rgba(255,255,255,0.04)",
@@ -89,10 +90,19 @@ function TeamCard({ team, isHuman, isHighBidder, isSelected, onClick }) {
           fontSize: 9, fontWeight: 700, color: "#fff", flexShrink: 0,
           border: "1.5px solid rgba(255,255,255,0.15)"
         }}>{team.short}</div>
-        <div style={{ minWidth: 0 }}>
+        <div style={{ minWidth: 0, flex: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "#f1f5f9", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{team.name}</div>
           <div style={{ fontSize: 10, color: "#64748b" }}>{team.players?.length || 0} players</div>
         </div>
+        {rtmCards > 0 && (
+          <div style={{
+            background: "rgba(168,85,247,0.15)", border: "1px solid rgba(168,85,247,0.3)",
+            borderRadius: 6, padding: "2px 7px", display: "flex", alignItems: "center", gap: 3, flexShrink: 0
+          }}>
+            <span style={{ fontSize: 11 }}>🃏</span>
+            <span style={{ fontSize: 10, fontWeight: 700, color: "#c084fc" }}>{rtmCards}</span>
+          </div>
+        )}
       </div>
       <BudgetBar remaining={team.budget_remaining} total={team.budget_total} />
     </div>
@@ -101,6 +111,7 @@ function TeamCard({ team, isHuman, isHighBidder, isSelected, onClick }) {
 
 function PlayerCard({ player, isLive = false }) {
   if (!player) return null;
+  const prevTeam = player.previous_team && player.previous_team !== "unsold" ? player.previous_team : null;
   return (
     <div style={{
       background: isLive ? "rgba(99,102,241,0.08)" : "rgba(255,255,255,0.03)",
@@ -120,6 +131,7 @@ function PlayerCard({ player, isLive = false }) {
         <div style={{ display: "flex", gap: 6, marginTop: 3, alignItems: "center", flexWrap: "wrap" }}>
           <Badge role={player.role} />
           {player.country && <span style={{ fontSize: 10, color: "#64748b" }}>{player.country}</span>}
+          {prevTeam && <span style={{ fontSize: 10, color: "#c084fc", background: "rgba(168,85,247,0.12)", padding: "1px 7px", borderRadius: 20, border: "1px solid rgba(168,85,247,0.25)" }}>ex-{prevTeam}</span>}
           {player.specialist_tags?.slice(0, 2).map(t => (
             <span key={t} style={{ fontSize: 10, color: "#6366f1", background: "rgba(99,102,241,0.1)", padding: "1px 6px", borderRadius: 20 }}>{t}</span>
           ))}
@@ -192,9 +204,16 @@ function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams, onToggleSpeed 
           }}>{player.name?.split(" ").map(w => w[0]).join("").slice(0, 2)}</div>
           <div>
             <div style={{ fontSize: 20, fontWeight: 800, color: "#f8fafc" }}>{player.name}</div>
-            <div style={{ display: "flex", gap: 8, marginTop: 4, alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 8, marginTop: 4, alignItems: "center", flexWrap: "wrap" }}>
               <Badge role={player.role} />
               {player.country && <span style={{ fontSize: 11, color: "#64748b" }}>{player.country}</span>}
+              {player.previous_team && player.previous_team !== "unsold" && (
+                <span style={{
+                  fontSize: 10, color: "#c084fc", background: "rgba(168,85,247,0.15)",
+                  padding: "2px 8px", borderRadius: 20, border: "1px solid rgba(168,85,247,0.3)",
+                  fontWeight: 600
+                }}>ex-{player.previous_team} · RTM eligible</span>
+              )}
             </div>
           </div>
         </div>
@@ -307,7 +326,7 @@ export default function App() {
       if (msg.data.feed) setFeed(msg.data.feed);
     } else if (msg.type === "auction_started") {
       setSetupMode(false);
-    } else if (msg.type === "bid_placed" || msg.type === "player_sold" || msg.type === "player_unsold") {
+    } else if (msg.type === "bid_placed" || msg.type === "player_sold" || msg.type === "player_unsold" || msg.type === "rtm_exercised") {
       setState(prev => ({ ...prev, auction: { ...prev?.auction, ...msg } }));
       if (msg.text) {
           setFeed(prev => [{ time: new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }), text: msg.text, type: msg.event_type || "info" }, ...prev]);

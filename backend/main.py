@@ -258,6 +258,10 @@ async def get_full_state():
         for p in sold_list:
             if p.id == pid:
                 return p.name, ROLE_MAP.get(p.role, "BAT")
+        for t in _auction_state.teams.values():
+            for p in t.retained_players:
+                if p.id == pid:
+                    return p.name, ROLE_MAP.get(p.role, "BAT")
         return pid, "BAT"
         
     def get_sold_player_details(pid: str):
@@ -278,6 +282,7 @@ async def get_full_state():
                 "color": "#6366f1",  # Hardcoded or map it later
                 "budget_total": round(t.total_budget / 100000), # in Lakhs
                 "budget_remaining": round(t.remaining_budget / 100000), # in Lakhs
+                "rtm_cards": getattr(t, "rtm_cards", 0),
                 "players": [
                     {
                         "name": get_sold_player_info(pid)[0],
@@ -289,7 +294,7 @@ async def get_full_state():
             }
             for t in teams_list
         ],
-        "players_remaining": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "base_price": round(p.base_price / 100000), "country": p.nationality.upper() if p.nationality else None, "specialist_tags": []} for p in (list(_auction_state.unsold_players) + list(_auction_state.truly_unsold_players))],
+        "players_remaining": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "base_price": round(p.base_price / 100000), "country": p.nationality.upper() if p.nationality else None, "specialist_tags": [], "previous_team": getattr(p, "previous_team", "unsold")} for p in (list(_auction_state.unsold_players) + list(_auction_state.truly_unsold_players))],
         "players_sold": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "sold_to": get_sold_player_details(p.id)[0], "sold_price": get_sold_player_details(p.id)[1], "base_price": round(p.base_price / 100000)} for p in list(_auction_state.sold_players)]
     }
 

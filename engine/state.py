@@ -21,13 +21,16 @@ class Player(BaseModel):
     specialist_tag: str = ""
     pace_bowler: bool = False
     spin_bowler: bool = False
+    previous_team: str = "unsold"
+    specialist_tags: List[str] = Field(default_factory=list)
+    hype_score: float = 0.0
 
 
 class Team(BaseModel):
     id: str
     name: str
-    total_budget: int = 1000000000  # Default 100 Cr
-    remaining_budget: int = 1000000000
+    total_budget: int = 1200000000  # 120 Cr
+    remaining_budget: int = 1200000000
     squad_size: int = 0
     max_squad_size: int = 25
     min_squad_size: int = 18
@@ -41,11 +44,24 @@ class Team(BaseModel):
     )
     # Roster mapping player_id -> purchase_price
     squad: Dict[str, int] = Field(default_factory=dict)
-
-    # NEW FIELD
+    
+    # Track full player objects
+    players: List[Player] = Field(default_factory=list)
+    
     overseas_slots_used: int = 0
+    retained_players: List[Player] = Field(default_factory=list)
+    rtm_cards: int = 0
 
-    # NEW PROPERTY
+    def overseas_xi_count(self) -> int:
+        """Counts overseas players that would realistically start (tier <= 2 or brand_value >= 0.6)."""
+        count = 0
+        # Combine retained and bought players
+        all_players = self.players + self.retained_players
+        for p in all_players:
+            if p.nationality != "indian" and (p.tier <= 2 or p.brand_value >= 0.6):
+                count += 1
+        return count
+
     @property
     def overseas_slots_remaining(self) -> int:
         return 4 - self.overseas_slots_used
@@ -77,6 +93,7 @@ class AuctionState(BaseModel):
     
     # Master records of teams and sold players
     teams: Dict[str, Team] = Field(default_factory=dict)
+    rtm_history: Dict[str, str] = Field(default_factory=dict)
     unsold_players: List[Player] = Field(default_factory=list)
     sold_players: List[Player] = Field(default_factory=list)
     truly_unsold_players: List[Player] = Field(default_factory=list)

@@ -13,6 +13,7 @@ class MemoryStore:
             "all_rounder": 1.0,
             "wicket_keeper": 1.0
         }
+        self.price_drive_events: list[dict] = []
 
     def _load_profiles(self, path: str) -> dict:
         try:
