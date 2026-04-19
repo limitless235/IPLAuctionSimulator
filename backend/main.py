@@ -289,7 +289,17 @@ async def get_full_state():
         return None, 0
         
     teams_list = list(_auction_state.teams.values())
-    
+
+    # Compute reservation pressure per team
+    from tools.valuation_filter import ValuationFilter
+    team_reservation_pressure = {}
+    for t in teams_list:
+        if t.remaining_budget > 0:
+            reserve = ValuationFilter.compute_dynamic_reservation(t, _auction_state)
+            team_reservation_pressure[t.id] = round(min(reserve / t.remaining_budget, 1.0), 3)
+        else:
+            team_reservation_pressure[t.id] = 1.0
+
     return {
         "auction": auction_state,
         "teams": [
@@ -300,6 +310,7 @@ async def get_full_state():
                 "budget_total": round(t.total_budget / 100000), # in Lakhs
                 "budget_remaining": round(t.remaining_budget / 100000), # in Lakhs
                 "rtm_cards": getattr(t, "rtm_cards", 0),
+                "reservation_pressure": team_reservation_pressure.get(t.id, 0),
                 "players": [
                     {
                         "name": get_sold_player_info(pid)[0],

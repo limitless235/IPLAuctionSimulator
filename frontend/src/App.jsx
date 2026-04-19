@@ -93,7 +93,17 @@ function TeamCard({ team, isHuman, isHighBidder, isSelected, onClick }) {
         }}>{team.short}</div>
         <div style={{ minWidth: 0, flex: 1 }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "#f1f5f9", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{team.name}</div>
-          <div style={{ fontSize: 10, color: "#64748b" }}>{team.players?.length || 0} players</div>
+          <div style={{ fontSize: 10, color: "#64748b", display: "flex", alignItems: "center", gap: 6 }}>
+            <span>{team.players?.length || 0} players</span>
+            {team.reservation_pressure > 0 && (
+              <span style={{ 
+                color: team.reservation_pressure > 0.7 ? "#ef4444" : team.reservation_pressure > 0.4 ? "#f59e0b" : "#64748b",
+                fontWeight: 600, fontSize: 9
+              }}>
+                • {team.reservation_pressure > 0.7 ? "CRITICAL" : team.reservation_pressure > 0.4 ? "STRESSED" : "STABLE"}
+              </span>
+            )}
+          </div>
         </div>
         {rtmCards > 0 && (
           <div style={{
