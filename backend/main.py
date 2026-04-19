@@ -241,9 +241,15 @@ async def start_auction(req: StartRequest):
         _auction_state = engine.state
         _stop_event.clear()
         send_state_snapshot()
-        orch.run_auction(test_mode=False)
-        auction_state["status"] = "finished"
-        sync_broadcast({"type": "auction_finished"})
+        try:
+            orch.run_auction(test_mode=False)
+        except Exception as e:
+            print(f"🔥 [FATAL AUCTION ERROR] {e}")
+            import traceback
+            traceback.print_exc()
+        finally:
+            auction_state["status"] = "finished"
+            sync_broadcast({"type": "auction_finished"})
 
     threading.Thread(target=run, daemon=True).start()
 
@@ -315,8 +321,15 @@ async def resume_auction():
             auction_state["feed"] = [] # Clear feed before showing resumed logs
             sync_broadcast({"type": "auction_resumed", "text": "Auction resumed from database snapshot"})
             
-            orch.run_auction(test_mode=False)
-            auction_state["status"] = "finished"
+            try:
+                orch.run_auction(test_mode=False)
+            except Exception as e:
+                print(f"🔥 [FATAL RESUME ERROR] {e}")
+                import traceback
+                traceback.print_exc()
+            finally:
+                auction_state["status"] = "finished"
+                sync_broadcast({"type": "auction_finished"})
 
         threading.Thread(target=run_resume, daemon=True).start()
         return {"ok": True, "message": "Auction resumed"}

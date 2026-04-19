@@ -42,7 +42,12 @@ class AuctionOrchestrator:
                     })
         
         self._log_test(test_mode, "AUCTION START", resp)
-
+        
+        # --- NEW: Broadcast Initial State ---
+        if self.broadcast_cb:
+            state_dict = json.loads(resp) if isinstance(resp, str) else resp
+            self.broadcast_cb(state_dict)
+        
         self._run_bidding_loop(test_mode)
 
         # --- ACCELERATED PHASE ---
@@ -104,8 +109,9 @@ class AuctionOrchestrator:
                     self.engine.state.unsold_players,
                     self.engine.state.unsold_players + self.engine.state.sold_players
                 )
-                if self.snapshot_cb:
-                    self.snapshot_cb(force=True)
+                if self.broadcast_cb:
+                    state_dict = self.engine.get_state_dict()
+                    self.broadcast_cb(state_dict)
                 if not test_mode:
                     speed = self.get_speed_cb() if self.get_speed_cb else "normal"
                     # Enforce a mandatory 0.1s "Memory Breather" even in fast mode
