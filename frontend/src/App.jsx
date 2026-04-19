@@ -543,8 +543,8 @@ export default function App() {
             borderRadius: 16, padding: "40px 48px", maxWidth: 440, width: "100%", textAlign: "center"
           }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}></div>
-            <div style={{ fontSize: 26, fontWeight: 800, color: "#f8fafc", marginBottom: 8 }}>IPL Auction 2025</div>
-            <div style={{ fontSize: 14, color: "#64748b", marginBottom: 32 }}>221 players · 10 teams · ₹1200L budget each</div>
+            <div style={{ fontSize: 26, fontWeight: 800, color: "#f8fafc", marginBottom: 8 }}>IPL Auction 2026</div>
+            <div style={{ fontSize: 14, color: "#64748b", marginBottom: 32 }}>221 players · 10 teams</div>
 
             <div style={{ marginBottom: 20, textAlign: "left" }}>
               <label style={{ fontSize: 12, color: "#94a3b8", display: "block", marginBottom: 6 }}>Play as a team (optional)</label>
