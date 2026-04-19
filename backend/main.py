@@ -10,7 +10,8 @@ from engine.auction_engine import AuctionEngine
 import asyncio
 import json
 import threading
-from typing import Optional
+import time
+from typing import Dict, Any, List, Optional
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -32,20 +33,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── In-memory auction state (replace with your real AuctionState) ────────────
+# Global state for UI synchronization
 auction_state = {
-    "status": "idle",          # idle | running | paused | finished
+    "status": "idle", # "idle", "running", "paused", "finished"
+    "speed": "normal", # "normal", "fast"
     "current_player": None,
+    "highest_bidder": None,
     "current_bid": 0,
-    "current_bid_team": None,
-    "timer_seconds": 15,
+    "feed": [],
     "human_team": None,
     "human_action_pending": False,
-    "speed": "normal", # "normal" | "fast"
-    "feed": [],
 }
 
-_auction_state: Optional[AuctionState] = None
+_main_loop = None
+_auction_state = None
+_stop_event = threading.Event()
+last_snapshot_time = 0
 
 ROLE_MAP = {"batter": "BAT", "bowler": "BOWL", "all_rounder": "ALL", "wicket_keeper": "WK"}
 
@@ -70,7 +73,9 @@ def sync_broadcast(payload: dict):
             "text": payload.get("text", ""),
             "type": payload.get("event_type", "info")
         })
-        pass # Keep all logs
+        # Memory Stabilization: Keep only the last 100 feed items to prevent RAM bloat
+        if len(auction_state["feed"]) > 100:
+            auction_state["feed"] = auction_state["feed"][:100]
     
     if _main_loop and _main_loop.is_running():
         asyncio.run_coroutine_threadsafe(broadcast(payload), _main_loop)
@@ -78,7 +83,14 @@ def sync_broadcast(payload: dict):
         asyncio.run(broadcast(payload))
 
 def send_state_snapshot():
-    """Forces the frontend to do a hard refresh of the state (current_player, human_team, etc)."""
+    """Forces the frontend to do a hard refresh of the state. 
+    Throttled to 1 per 500ms to prevent 60GB RAM spikes in fast mode."""
+    global last_snapshot_time
+    now = time.time()
+    if now - last_snapshot_time < 0.5:
+        return
+        
+    last_snapshot_time = now
     if _main_loop and _main_loop.is_running():
         async def _send():
             snap = await get_full_state()
@@ -169,7 +181,8 @@ async def start_auction(req: StartRequest):
             snapshot_cb=send_state_snapshot,
             is_paused_cb=lambda: auction_state["status"] == "paused",
             is_human_pending_cb=lambda: auction_state.get("human_action_pending", False),
-            get_speed_cb=lambda: auction_state.get("speed", "normal")
+            get_speed_cb=lambda: auction_state.get("speed", "normal"),
+            stop_event=_stop_event
         )
         
         _auction_state = engine.state

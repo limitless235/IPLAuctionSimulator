@@ -10,7 +10,7 @@ from tools.valuation_filter import ValuationFilter
 from store.memory import MemoryStore
 
 class AuctionOrchestrator:
-    def __init__(self, engine: AuctionEngine, team_agents: Dict[str, TeamAgent], human_team_id: str = None, memory: MemoryStore = None, broadcast_cb=None, snapshot_cb=None, is_paused_cb=None, is_human_pending_cb=None, get_speed_cb=None):
+    def __init__(self, engine: AuctionEngine, team_agents: Dict[str, TeamAgent], human_team_id: str = None, memory: MemoryStore = None, broadcast_cb=None, snapshot_cb=None, is_paused_cb=None, is_human_pending_cb=None, get_speed_cb=None, stop_event=None):
         self.engine = engine
         self.team_agents = team_agents
         self.human_team_id = human_team_id
@@ -20,6 +20,7 @@ class AuctionOrchestrator:
         self.is_paused_cb = is_paused_cb
         self.is_human_pending_cb = is_human_pending_cb
         self.get_speed_cb = get_speed_cb
+        self.stop_event = stop_event
 
     def run_auction(self, test_mode: bool = False):
         print("Starting IPL Auction Simulator...")
@@ -55,6 +56,10 @@ class AuctionOrchestrator:
             self.snapshot_cb()
 
         while True:
+            if self.stop_event and self.stop_event.is_set():
+                print("[ORCHESTRATOR] Stop signal received. Terminating bidding loop.")
+                return
+
             if self.is_paused_cb and self.is_paused_cb():
                 time.sleep(1)
                 continue
@@ -309,6 +314,8 @@ class AuctionOrchestrator:
         # Collect shortlists from each team
         shortlisted_names = set()
         for team_id, agent in self.team_agents.items():
+            if self.stop_event and self.stop_event.is_set():
+                return
             names = agent.submit_accelerated_shortlist(unsold_pool, state)
             if names:
                 print(f"  {team_id} shortlists: {names}")
