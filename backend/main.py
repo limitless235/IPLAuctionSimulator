@@ -12,6 +12,8 @@ import json
 import threading
 import time
 from typing import Dict, Any, List, Optional
+from database.db_manager import DatabaseManager
+from backend.keep_alive import start_pinger
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -27,7 +29,7 @@ app = FastAPI(title="IPL Auction Simulator API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_origins=os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:5173").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -43,12 +45,14 @@ auction_state = {
     "feed": [],
     "human_team": None,
     "human_action_pending": False,
+    "session_name": "ipl_2025_mega_auction" # Default session
 }
 
 _main_loop = None
 _auction_state = None
 _stop_event = threading.Event()
 last_snapshot_time = 0
+db = DatabaseManager()
 
 ROLE_MAP = {"batter": "BAT", "bowler": "BOWL", "all_rounder": "ALL", "wicket_keeper": "WK"}
 
@@ -64,6 +68,18 @@ _main_loop = None
 async def on_startup():
     global _main_loop
     _main_loop = asyncio.get_running_loop()
+    
+    # Initialize Database
+    try:
+        db.init_db()
+        print("📁 [DATABASE] Tables initialized.")
+    except Exception as e:
+        print(f"❌ [DATABASE] Initialization failed: {e}")
+        
+    # Start Keep-Alive Pinger if PUBLIC_URL is set
+    public_url = os.getenv("PUBLIC_URL")
+    if public_url:
+        start_pinger(public_url)
 
 def sync_broadcast(payload: dict):
     from datetime import datetime
@@ -76,6 +92,10 @@ def sync_broadcast(payload: dict):
         # Memory Stabilization: Keep only the last 100 feed items to prevent RAM bloat
         if len(auction_state["feed"]) > 100:
             auction_state["feed"] = auction_state["feed"][:100]
+            
+        # Persistence: Save state after every SOLD event
+        if payload.get("type") == "player_sold" and _auction_state:
+            db.save_state(auction_state["session_name"], _auction_state)
     
     if _main_loop and _main_loop.is_running():
         asyncio.run_coroutine_threadsafe(broadcast(payload), _main_loop)
@@ -96,6 +116,11 @@ def send_state_snapshot(force=False):
             snap = await get_full_state()
             await broadcast({"type": "state_snapshot", "data": snap})
         asyncio.run_coroutine_threadsafe(_send(), _main_loop)
+
+# ── Health Check (Keep-Alive) ──────────────────────────────────────────────────
+@app.get("/health")
+async def health_check():
+    return {"status": "ok", "time": time.time()}
 
 # ── WebSocket broadcast helper ────────────────────────────────────────────────
 async def broadcast(payload: dict):
@@ -186,6 +211,7 @@ async def start_auction(req: StartRequest):
         )
         
         _auction_state = engine.state
+        _stop_event.clear()
         send_state_snapshot()
         orch.run_auction(test_mode=False)
         auction_state["status"] = "finished"
@@ -206,9 +232,69 @@ async def pause_auction():
 
 @app.post("/auction/resume")
 async def resume_auction():
-    auction_state["status"] = "running"
-    await broadcast({"type": "auction_resumed"})
-    return {"ok": True}
+    """Resumes an auction from the latest database snapshot."""
+    global _auction_state, _stop_event
+    
+    if auction_state["status"] == "running":
+        raise HTTPException(400, "Auction already running")
+        
+    session_name = auction_state["session_name"]
+    latest_json = db.get_latest_state(session_name)
+    
+    if not latest_json:
+        raise HTTPException(404, "No saved session found to resume")
+        
+    # Reconstruct state
+    try:
+        from engine.state import AuctionState
+        resumed_state = AuctionState(**latest_json)
+        _auction_state = resumed_state
+        
+        # Reset stop event for new thread
+        _stop_event.clear()
+        
+        def run_resume():
+            # Build agents from profiles
+            from agents.team_agent import TeamAgent
+            from agents.orchestrator import AuctionOrchestrator
+            from store.memory import MemoryStore
+            from engine.auction_engine import AuctionEngine
+            
+            memory = MemoryStore()
+            team_agents = {}
+            for t_id, t_prof in memory.team_profiles.items():
+                if t_id in resumed_state.teams:
+                    team = resumed_state.teams[t_id]
+                    if t_id != resumed_state.human_team:
+                        team_agents[t_id] = TeamAgent(team=team, personality=t_prof)
+            
+            engine = AuctionEngine(resumed_state)
+            orch = AuctionOrchestrator(
+                engine=engine,
+                team_agents=team_agents,
+                human_team_id=resumed_state.human_team,
+                memory=memory,
+                broadcast_cb=sync_broadcast,
+                snapshot_cb=send_state_snapshot,
+                is_paused_cb=lambda: auction_state["status"] == "paused",
+                is_human_pending_cb=lambda: auction_state.get("human_action_pending", False),
+                get_speed_cb=lambda: auction_state.get("speed", "normal"),
+                stop_event=_stop_event
+            )
+            
+            auction_state["status"] = "running"
+            auction_state["human_team"] = resumed_state.human_team
+            sync_broadcast({"type": "auction_resumed", "text": "Auction resumed from database snapshot"})
+            
+            orch.run_auction(test_mode=False)
+            auction_state["status"] = "finished"
+
+        threading.Thread(target=run_resume, daemon=True).start()
+        return {"ok": True, "message": "Auction resumed"}
+        
+    except Exception as e:
+        print(f"❌ [RESUME ERROR] {e}")
+        raise HTTPException(500, f"Failed to reconstruct state: {e}")
 
 
 class SpeedRequest(BaseModel):

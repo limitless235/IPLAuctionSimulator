@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
-const API = "http://localhost:8000";
-const WS_URL = "ws://localhost:8000/ws";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "localhost:8000";
+const IS_HTTPS = window.location.protocol === "https:";
+const API = IS_HTTPS ? `https://${BACKEND_URL}` : `http://${BACKEND_URL}`;
+const WS_URL = IS_HTTPS ? `wss://${BACKEND_URL}/ws` : `ws://${BACKEND_URL}/ws`;
 
 const ROLE_COLOR = { BAT: "#3b82f6", BOWL: "#ef4444", ALL: "#f59e0b", WK: "#8b5cf6" };
 const ROLE_LABEL = { BAT: "Batter", BOWL: "Bowler", ALL: "All-rounder", WK: "Keeper" };
