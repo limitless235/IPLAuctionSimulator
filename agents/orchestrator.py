@@ -156,6 +156,23 @@ class AuctionOrchestrator:
                     self.engine.apply_action({"action_type": "PASS", "team_id": current_team_id})
                     continue
 
+                # --- RTM STRATEGIC AUTO-PASS ---
+                # If this team holds RTM for the current player and someone else
+                # has already bid, there's no reason to bid now — they'd only be
+                # driving the price up against themselves.  They can exercise RTM
+                # at whatever the final hammer price turns out to be.
+                # Exception: if nobody has bid yet (highest_bidder is None), the
+                # RTM team should still open bidding to prevent their target from
+                # going unsold.
+                rtm_holder = state.rtm_history.get(player.name)
+                if (rtm_holder == current_team_id
+                        and agent.team.rtm_cards > 0
+                        and state.highest_bidder is not None):
+                    self._log_test(test_mode, f"{current_team_id} RTM Hold",
+                                   f"Sitting out — holds RTM for {player.name}, will decide at hammer price.")
+                    self.engine.apply_action({"action_type": "PASS", "team_id": current_team_id})
+                    continue
+
                 scarcity = self.memory.role_scarcity_index.get(player.role, 1.0)
                 filter_tool = ValuationFilter(agent.team, player, agent.personality, scarcity)
 

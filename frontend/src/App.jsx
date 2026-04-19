@@ -168,8 +168,21 @@ function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams, onToggleSpeed 
   const nextBid = auction?.next_bid || (currentBid ? Math.round(currentBid * 1.1) : player?.base_price || 0);
   const speed = auction?.speed || "normal";
 
+  const speedButton = !humanTeam ? (
+    <button onClick={onToggleSpeed} style={{
+      background: speed === "fast" ? "rgba(245,158,11,0.2)" : "rgba(255,255,255,0.05)",
+      border: `1px solid ${speed === "fast" ? "rgba(245,158,11,0.4)" : "rgba(255,255,255,0.1)"}`,
+      color: speed === "fast" ? "#fcd34d" : "#94a3b8",
+      padding: "4px 10px", borderRadius: 12, fontSize: 11, fontWeight: 700, cursor: "pointer",
+      display: "flex", alignItems: "center", gap: 4
+    }}>
+      {speed === "fast" ? "⏪ Normal Speed" : "⏩ Fast Forward"}
+    </button>
+  ) : null;
+
   if (!player) return (
     <div style={{ textAlign: "center", padding: "40px 20px", color: "#475569" }}>
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 12 }}>{speedButton}</div>
       <div style={{ fontSize: 32, marginBottom: 8 }}>🏏</div>
       <div style={{ fontSize: 14 }}>Waiting for next player…</div>
     </div>
@@ -182,17 +195,7 @@ function LiveBidPanel({ auction, onBid, onPass, humanTeam, teams, onToggleSpeed 
           <div style={{ fontSize: 11, color: "#6366f1", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
             {isHumanTurn ? "⚡ Your Turn" : "🔴 Live Now"}
           </div>
-          {!humanTeam && (
-            <button onClick={onToggleSpeed} style={{
-              background: speed === "fast" ? "rgba(245,158,11,0.2)" : "rgba(255,255,255,0.05)",
-              border: `1px solid ${speed === "fast" ? "rgba(245,158,11,0.4)" : "rgba(255,255,255,0.1)"}`,
-              color: speed === "fast" ? "#fcd34d" : "#94a3b8",
-              padding: "4px 10px", borderRadius: 12, fontSize: 11, fontWeight: 700, cursor: "pointer",
-              display: "flex", alignItems: "center", gap: 4
-            }}>
-              {speed === "fast" ? "⏪ Normal Speed" : "⏩ Fast Forward"}
-            </button>
-          )}
+          {speedButton}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <div style={{
