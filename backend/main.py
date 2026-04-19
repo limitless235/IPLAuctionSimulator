@@ -64,7 +64,7 @@ async def on_startup():
 
 def sync_broadcast(payload: dict):
     from datetime import datetime
-    if payload.get("type") in ("bid_placed", "player_sold", "player_unsold"):
+    if payload.get("type") in ("bid_placed", "player_sold", "player_unsold", "player_retained"):
         auction_state["feed"].insert(0, {
             "time": datetime.now().strftime("%I:%M %p"),
             "text": payload.get("text", ""),
@@ -252,7 +252,7 @@ async def submit_accelerated_shortlist(req: AcceleratedShortlistRequest):
 @app.get("/state")
 async def get_full_state():
     if _auction_state is None:
-        return {"auction": auction_state, "teams": _stub_teams(), "players_remaining": _stub_remaining_players(), "players_sold": _stub_sold_players(), "feed": _stub_feed()}
+        return {"auction": auction_state, "teams": _stub_teams(), "players_remaining": _stub_remaining_players(), "players_sold": [], "feed": []}
     
     # Fill in tracking values
     if _auction_state.current_player:
@@ -323,7 +323,8 @@ async def get_full_state():
             for t in teams_list
         ],
         "players_remaining": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "base_price": round(p.base_price / 100000), "country": p.nationality.upper() if p.nationality else None, "specialist_tags": [], "previous_team": getattr(p, "previous_team", "unsold")} for p in (list(_auction_state.unsold_players) + list(_auction_state.truly_unsold_players))],
-        "players_sold": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "sold_to": get_sold_player_details(p.id)[0], "sold_price": get_sold_player_details(p.id)[1], "base_price": round(p.base_price / 100000)} for p in list(_auction_state.sold_players)]
+        "players_sold": [{"name": p.name, "role": ROLE_MAP.get(p.role, "BAT"), "sold_to": get_sold_player_details(p.id)[0], "sold_price": get_sold_player_details(p.id)[1], "base_price": round(p.base_price / 100000)} for p in list(_auction_state.sold_players)],
+        "feed": auction_state["feed"]
     }
 
 
@@ -429,11 +430,7 @@ def _stub_sold_players():
 
 
 def _stub_feed():
-    return [
-        {"time": "10:42", "text": "Rohit Sharma SOLD to Mumbai Indians for ₹16 Cr", "type": "sold"},
-        {"time": "10:38", "text": "MS Dhoni SOLD to CSK for ₹16 Cr", "type": "sold"},
-        {"time": "10:34", "text": "Virat Kohli SOLD to RCB for ₹15 Cr", "type": "sold"},
-    ]
+    return []
 
 
 def _role_breakdown(players):

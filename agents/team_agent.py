@@ -37,6 +37,21 @@ SQUAD_BLUEPRINTS = {
 # Default blueprint for unknown teams
 DEFAULT_BLUEPRINT = {"batter": 5, "bowler": 6, "all_rounder": 6, "wicket_keeper": 2}
 
+# Realism Upgrade: Scout-Driven Bias (Breakout Performers)
+# Teams value these specific Tier 3/4 players much higher based on real 2024 form.
+SCOUT_FAVORITES = {
+    "MI":   ["Naman Dhir", "Nehal Wadhera", "Anukul Roy"],
+    "CSK":  ["Kumar Kartikeya", "Arjun Tendulkar"],
+    "RCB":  ["Rasikh Salam Dar", "Harshit Rana", "Prasidh Krishna"],
+    "PBKS": ["Shashank Singh", "Ashutosh Sharma", "Nehal Wadhera"],
+    "SRH":  ["Nitish Kumar Reddy", "Abdul Samad", "Abhishek Sharma"],
+    "LSG":  ["Mayank Yadav", "Abdul Samad", "Ayush Badoni"],
+    "KKR":  ["Harshit Rana", "Ramandeep Singh", "Angkrish Raghuvanshi"],
+    "RR":   ["Vaibhav Suryavanshi", "Tanush Kotian"],
+    "DC":   ["Abishek Porel", "Rasikh Salam Dar"],
+    "GT":   ["Sai Kishore", "Shahrukh Khan"]
+}
+
 
 class TeamAgent:
     def __init__(self, team: Team, personality: Dict[str, float]):
@@ -136,7 +151,14 @@ class TeamAgent:
         original_hype = player.hype_score
         player.hype_score = min(1.0, original_hype + team_specific_noise)
         
-        base_valuation = filter_tool.calculate_max_price()
+        # --- SCOUT BIAS ---
+        scout_multiplier = 1.0
+        if player.name in SCOUT_FAVORITES.get(self.team.id, []):
+            # Breakout players get a massive boost (1.8x to 2.5x)
+            scout_multiplier = 2.0
+            if player.tier >= 4: scout_multiplier = 2.5 # Uncapped gems
+            
+        base_valuation = filter_tool.calculate_max_price(scout_multiplier=scout_multiplier)
         
         # Restore original hype score
         player.hype_score = original_hype
@@ -197,6 +219,16 @@ class TeamAgent:
         if self.team.squad_size >= 20 and not player.is_star and not hit_info["on_list"]:
             base_valuation = int(base_valuation * 0.4)
 
+        # --- FINAL JITTER & SANITY CHECKS ---
+        jitter = random.gauss(1.0, 0.05)
+        base_valuation = int(base_valuation * jitter)
+        
+        # Absolute Purse Ceiling: No single player is worth more than 30 Cr in this market.
+        # This prevents the "KL Rahul 60Cr" outlier and ensures teams have budget for 18+ players.
+        ABSOLUTE_CEILING = 300000000 # 30 Cr
+        if base_valuation > ABSOLUTE_CEILING:
+            base_valuation = ABSOLUTE_CEILING
+            
         return base_valuation
 
     def should_invoke_rtm(self, player: Player, current_bid: int, state) -> bool:
@@ -326,6 +358,11 @@ class TeamAgent:
         max_price_override = None
         if state is not None:
             max_price_override = self.compute_valuation(player, state)
+            
+        # Logging for scout favorites (internal simulation signal)
+        if player.name in SCOUT_FAVORITES.get(self.team.id, []) and next_bid <= (max_price_override or 0):
+            if current_bid == player.base_price:
+                 print(f"🎯 [SCOUT FAVORITE] {self.team.id} is targeting breakout star {player.name}!")
             
         if filter_tool.should_auto_pass(current_bid, max_price_override=max_price_override):
             return AgentDecision(decision="PASS")

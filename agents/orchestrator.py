@@ -24,6 +24,22 @@ class AuctionOrchestrator:
     def run_auction(self, test_mode: bool = False):
         print("Starting IPL Auction Simulator...")
         resp = self.engine.start_auction()
+        
+        # --- NEW: Broadcast Retentions to Feed ---
+        for team_id, team in self.engine.state.teams.items():
+            for p in team.retained_players:
+                # Find the cost from the squad mapping (set in run_retention_phase)
+                cost = team.squad.get(p.id, 0)
+                if self.broadcast_cb:
+                    self.broadcast_cb({
+                        "type": "player_retained",
+                        "player": p.name,
+                        "team": team_id,
+                        "price": round(cost / 100000),
+                        "text": f"⭐️ {p.name} RETAINED by {team.name} for ₹{round(cost / 10000000, 1)} Cr",
+                        "event_type": "info"
+                    })
+        
         self._log_test(test_mode, "AUCTION START", resp)
 
         self._run_bidding_loop(test_mode)

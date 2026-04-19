@@ -139,12 +139,12 @@ class ValuationFilter:
 
         # Role-specific hard caps
         role_caps = {
-            "wicket_keeper": 3.5,  # Keeper shortage is critical
-            "bowler": 2.5,
-            "batter": 2.0,
-            "all_rounder": 1.5,
+            "wicket_keeper": 2.2,  # Keeper shortage is still important but capped
+            "bowler": 1.8,
+            "batter": 1.5,
+            "all_rounder": 1.3,
         }
-        final_multiplier = min(final_multiplier, role_caps.get(role, 2.0))
+        final_multiplier = min(final_multiplier, role_caps.get(role, 1.5))
 
         return final_multiplier
 
@@ -202,7 +202,25 @@ class ValuationFilter:
             return 1.1  # Team needs overseas quality
         return 1.0
 
-    def calculate_max_price(self, state=None) -> int:
+    def compute_redundancy_penalty(self, player: Player, team: Team) -> float:
+        """Role Redundancy Ceiling: Prevents buying too many superstars of the same role.
+        
+        If a team already has 2 or more 'Star' players in a role, they should 
+        drastically reduce valuation for a 3rd star of that same role.
+        """
+        if not player.is_star:
+            return 1.0
+            
+        star_count = sum(1 for p in (team.players + team.retained_players) if p.is_star and p.role == player.role)
+        
+        if star_count >= 2:
+            return 0.3 # 70% discount for redundant superstars
+        elif star_count == 1:
+            return 0.8 # Slight caution for the second star in same role
+            
+        return 1.0
+
+    def calculate_max_price(self, state=None, scout_multiplier: float = 1.0) -> int:
         # Post-retention calibrated tier bases (2025 mega auction price levels)
         # Tier 1 = franchise-defining (Pant, Shreyas, Starc) → ₹15-27Cr
         # Tier 2 = quality starters (Chahal, Curran, Jansen) → ₹5-12Cr
@@ -215,6 +233,9 @@ class ValuationFilter:
         if self.player.is_star:
             base_val += int(self.personality["star_bias"] * 40000000)
         base_val += int(self.player.brand_value * self.personality["star_bias"] * 25000000)
+
+        # --- SCOUT BIAS ---
+        base_val = int(base_val * scout_multiplier)
 
         # Recent form adjustment
         form_multiplier = 0.75 + (self.player.recent_form * 0.5)
@@ -248,6 +269,17 @@ class ValuationFilter:
         # Overseas penalty/bonus
         overseas_mult = self.compute_overseas_penalty(self.player, self.team)
         base_val = int(base_val * overseas_mult)
+
+        # Redundancy penalty
+        redundancy_mult = self.compute_redundancy_penalty(self.player, self.team)
+        base_val = int(base_val * redundancy_mult)
+
+        # --- ABSOLUTE SANITY CAP ---
+        # 2025 Market Ceiling: No player is worth more than 30 Cr to any team.
+        # This ensures teams have budget for a full 18-25 member squad.
+        ABSOLUTE_CEILING = 300000000 
+        if base_val > ABSOLUTE_CEILING:
+            base_val = ABSOLUTE_CEILING
 
         # Pace and spin bias
         if self.player.pace_bowler:
