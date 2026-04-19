@@ -161,6 +161,7 @@ async def start_auction(req: StartRequest):
 
     auction_state["status"] = "running"
     auction_state["human_team"] = req.human_team
+    auction_state["feed"] = [] # Clear stale logs from previous runs
     
     # Map frontend full names to backend shorthand IDs
     TEAM_ID_MAP = {
@@ -284,6 +285,7 @@ async def resume_auction():
             
             auction_state["status"] = "running"
             auction_state["human_team"] = resumed_state.human_team
+            auction_state["feed"] = [] # Clear feed before showing resumed logs
             sync_broadcast({"type": "auction_resumed", "text": "Auction resumed from database snapshot"})
             
             orch.run_auction(test_mode=False)
