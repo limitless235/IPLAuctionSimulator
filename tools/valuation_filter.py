@@ -110,11 +110,20 @@ class ValuationFilter:
         base_val = int(base_val * form_multiplier)
 
         # Youth and Hype bias
+        # Hype matters most for lower-tier uncapped players where scout buzz,
+        # domestic form clips, and social-media virality are the PRIMARY price
+        # drivers.  For Tier-1 stars, hype is noise — their stats speak.
         if self.player.is_youth or self.player.age < 23:
             youth_base = int(self.personality["youth_bias"] * 15000000)
-            if self.player.tier <= 2:
-                hype_multiplier = 1.0 + (self.player.hype_score * self.personality.get("youth_bias", 0.3) * 1.8)
-                youth_base = int(youth_base * hype_multiplier)
+            # Tier-scaled hype: stronger effect at lower tiers
+            #   Tier 4: ×2.5 — hype is everything (Vaibhav Suryavanshi effect)
+            #   Tier 3: ×2.0 — domestic buzz drives surprise bids
+            #   Tier 2: ×1.5 — moderate hype amplification
+            #   Tier 1: ×0.8 — already valued on merit, hype is marginal
+            hype_tier_weight = {1: 0.8, 2: 1.5, 3: 2.0, 4: 2.5}
+            tier_w = hype_tier_weight.get(self.player.tier, 1.5)
+            hype_multiplier = 1.0 + (self.player.hype_score * self.personality.get("youth_bias", 0.3) * tier_w)
+            youth_base = int(youth_base * hype_multiplier)
             base_val += youth_base
 
         # Veteran bias

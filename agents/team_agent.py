@@ -318,6 +318,12 @@ class TeamAgent:
         # Youth and veteran bias
         if player.is_youth or player.age < 23:
             score += self.personality["youth_bias"] * 0.1
+            # Hype-driven interest — hyped youngsters attract more bidders,
+            # creating the multi-team wars that drive surprise prices.
+            # Effect is strongest for lower tiers where hype is the main signal.
+            if player.hype_score > 0.3:
+                hype_tier_boost = {1: 0.05, 2: 0.10, 3: 0.18, 4: 0.25}
+                score += hype_tier_boost.get(player.tier, 0.12) * self.personality.get("youth_bias", 0.5)
         if player.age > 30:
             score += self.personality["veteran_bias"] * 0.08
 

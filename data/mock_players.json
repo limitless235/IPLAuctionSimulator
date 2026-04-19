@@ -16,7 +16,7 @@
         "specialist_tags": [
             "hard-hitting"
         ],
-        "hype_score": 0.09,
+        "hype_score": 0.23,
         "tier": 1,
         "recent_form": 0.75,
         "age": 37
@@ -46,7 +46,7 @@
             "finisher",
             "keeper-lower"
         ],
-        "hype_score": 0.22
+        "hype_score": 0.28
     },
     {
         "id": "p2",
@@ -73,7 +73,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.37
     },
     {
         "id": "p3",
@@ -99,7 +99,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.06
     },
     {
         "id": "p4",
@@ -126,7 +126,7 @@
             "top-order",
             "hard-hitting"
         ],
-        "hype_score": 0.29
+        "hype_score": 0.28
     },
     {
         "id": "p5",
@@ -152,7 +152,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.42
     },
     {
         "id": "p6",
@@ -178,7 +178,7 @@
         "specialist_tags": [
             "middle-order"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.4
     },
     {
         "id": "p7",
@@ -204,7 +204,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.17
     },
     {
         "id": "p8",
@@ -233,7 +233,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.28
+        "hype_score": 0.46
     },
     {
         "id": "p9",
@@ -263,7 +263,7 @@
             "finisher",
             "finger-spin"
         ],
-        "hype_score": 0.25
+        "hype_score": 0.18
     },
     {
         "id": "p10",
@@ -292,7 +292,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.0
     },
     {
         "id": "p11",
@@ -321,7 +321,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.06
     },
     {
         "id": "p12",
@@ -332,7 +332,7 @@
         "is_youth": true,
         "age": 23,
         "nationality": "indian",
-        "tier": 4,
+        "tier": 3,
         "brand_value": 0.15,
         "recent_form": 0.6,
         "ipl_experience": 1,
@@ -350,7 +350,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.32
     },
     {
         "id": "p13",
@@ -379,7 +379,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.14
     },
     {
         "id": "p14",
@@ -406,7 +406,7 @@
             "finger-spin",
             "bowling-allrounder"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.16
     },
     {
         "id": "p15",
@@ -436,7 +436,7 @@
             "bowling-allrounder",
             "swing"
         ],
-        "hype_score": 0.1
+        "hype_score": 0.32
     },
     {
         "id": "p16",
@@ -463,7 +463,7 @@
             "pace-middle",
             "bowling-allrounder"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.03
     },
     {
         "id": "p17",
@@ -492,7 +492,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.67
     },
     {
         "id": "p18",
@@ -518,7 +518,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.28
+        "hype_score": 0.64
     },
     {
         "id": "p19",
@@ -570,7 +570,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.07
     },
     {
         "id": "p21",
@@ -596,7 +596,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.4
     },
     {
         "id": "p22",
@@ -622,7 +622,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.55
     },
     {
         "id": "p23",
@@ -648,7 +648,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.12
     },
     {
         "id": "p24",
@@ -674,7 +674,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.33
     },
     {
         "id": "p25",
@@ -700,7 +700,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.05
     },
     {
         "id": "p26",
@@ -726,7 +726,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.27
+        "hype_score": 0.42
     },
     {
         "id": "p27",
@@ -753,7 +753,7 @@
             "top-order",
             "hard-hitting"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.48
     },
     {
         "id": "p28",
@@ -780,7 +780,7 @@
             "finisher",
             "keeper-lower"
         ],
-        "hype_score": 0.15
+        "hype_score": 0.58
     },
     {
         "id": "p29",
@@ -807,7 +807,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.44
     },
     {
         "id": "p30",
@@ -834,7 +834,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.11
     },
     {
         "id": "p31",
@@ -861,7 +861,7 @@
             "finisher",
             "keeper-lower"
         ],
-        "hype_score": 0.18
+        "hype_score": 0.44
     },
     {
         "id": "p32",
@@ -917,7 +917,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.18
+        "hype_score": 0.68
     },
     {
         "id": "p34",
@@ -943,7 +943,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.39
     },
     {
         "id": "p35",
@@ -972,7 +972,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.29
     },
     {
         "id": "p36",
@@ -1001,7 +1001,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.63
     },
     {
         "id": "p37",
@@ -1030,7 +1030,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.07
     },
     {
         "id": "p38",
@@ -1059,7 +1059,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.41
     },
     {
         "id": "p39",
@@ -1088,7 +1088,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.38
     },
     {
         "id": "p40",
@@ -1117,7 +1117,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.38
     },
     {
         "id": "p41",
@@ -1143,7 +1143,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.4
+        "hype_score": 0.52
     },
     {
         "id": "p42",
@@ -1169,7 +1169,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.03
     },
     {
         "id": "p43",
@@ -1196,7 +1196,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.16
+        "hype_score": 0.2
     },
     {
         "id": "p44",
@@ -1222,7 +1222,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.17
     },
     {
         "id": "p45",
@@ -1248,7 +1248,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.17
     },
     {
         "id": "p46",
@@ -1274,7 +1274,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.16
     },
     {
         "id": "p47",
@@ -1301,7 +1301,7 @@
             "top-order",
             "hard-hitting"
         ],
-        "hype_score": 0.25
+        "hype_score": 0.3
     },
     {
         "id": "p48",
@@ -1327,7 +1327,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.29
+        "hype_score": 0.27
     },
     {
         "id": "p49",
@@ -1353,7 +1353,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.22
+        "hype_score": 0.43
     },
     {
         "id": "p50",
@@ -1380,7 +1380,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.35
     },
     {
         "id": "p51",
@@ -1407,7 +1407,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.04
     },
     {
         "id": "p52",
@@ -1434,7 +1434,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.29
+        "hype_score": 0.21
     },
     {
         "id": "p53",
@@ -1464,7 +1464,7 @@
             "finisher",
             "wrist-spin"
         ],
-        "hype_score": 0.4
+        "hype_score": 0.34
     },
     {
         "id": "p54",
@@ -1493,7 +1493,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.18
+        "hype_score": 0.43
     },
     {
         "id": "p55",
@@ -1519,7 +1519,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.18
+        "hype_score": 0.42
     },
     {
         "id": "p56",
@@ -1548,7 +1548,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.38
     },
     {
         "id": "p57",
@@ -1577,7 +1577,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.17
     },
     {
         "id": "p58",
@@ -1606,7 +1606,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.64
     },
     {
         "id": "p59",
@@ -1635,7 +1635,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.08
     },
     {
         "id": "p60",
@@ -1664,7 +1664,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.0
     },
     {
         "id": "p61",
@@ -1693,7 +1693,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.47
     },
     {
         "id": "p62",
@@ -1722,7 +1722,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.04
     },
     {
         "id": "p63",
@@ -1751,7 +1751,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.14
     },
     {
         "id": "p64",
@@ -1780,7 +1780,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.06
     },
     {
         "id": "p65",
@@ -1806,7 +1806,7 @@
         "specialist_tags": [
             "finger-spin"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.41
     },
     {
         "id": "p66",
@@ -1832,7 +1832,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.0
+        "hype_score": 0.05
     },
     {
         "id": "p67",
@@ -1859,7 +1859,7 @@
             "swing",
             "pace-powerplay"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.44
     },
     {
         "id": "p68",
@@ -1886,7 +1886,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.41
+        "hype_score": 0.52
     },
     {
         "id": "p69",
@@ -1912,7 +1912,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.1
+        "hype_score": 0.2
     },
     {
         "id": "p70",
@@ -1939,7 +1939,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.39
+        "hype_score": 0.46
     },
     {
         "id": "p71",
@@ -1965,7 +1965,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.06
     },
     {
         "id": "p72",
@@ -1991,7 +1991,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.4
+        "hype_score": 0.49
     },
     {
         "id": "p73",
@@ -2017,7 +2017,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.39
     },
     {
         "id": "p74",
@@ -2043,7 +2043,7 @@
         "specialist_tags": [
             "middle-order"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.06
     },
     {
         "id": "p75",
@@ -2069,7 +2069,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.03
     },
     {
         "id": "p76",
@@ -2096,7 +2096,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.16
     },
     {
         "id": "p77",
@@ -2123,7 +2123,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.16
     },
     {
         "id": "p78",
@@ -2150,7 +2150,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.0
     },
     {
         "id": "p79",
@@ -2180,7 +2180,7 @@
             "bowling-allrounder",
             "finger-spin"
         ],
-        "hype_score": 0.3
+        "hype_score": 0.46
     },
     {
         "id": "p80",
@@ -2211,7 +2211,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.37
     },
     {
         "id": "p81",
@@ -2240,7 +2240,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.28
     },
     {
         "id": "p82",
@@ -2269,7 +2269,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.42
     },
     {
         "id": "p83",
@@ -2298,7 +2298,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.22
+        "hype_score": 0.37
     },
     {
         "id": "p84",
@@ -2327,7 +2327,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.25
+        "hype_score": 0.34
     },
     {
         "id": "p85",
@@ -2357,7 +2357,7 @@
             "bowling-allrounder",
             "finger-spin"
         ],
-        "hype_score": 0.1
+        "hype_score": 0.46
     },
     {
         "id": "p86",
@@ -2383,7 +2383,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.44
+        "hype_score": 0.46
     },
     {
         "id": "p87",
@@ -2409,7 +2409,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.17
     },
     {
         "id": "p88",
@@ -2435,7 +2435,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.06
     },
     {
         "id": "p89",
@@ -2461,7 +2461,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.15
+        "hype_score": 0.33
     },
     {
         "id": "p90",
@@ -2488,7 +2488,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.36
     },
     {
         "id": "p91",
@@ -2514,7 +2514,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.46
     },
     {
         "id": "p92",
@@ -2540,7 +2540,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.01
     },
     {
         "id": "p93",
@@ -2566,7 +2566,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.2
     },
     {
         "id": "p94",
@@ -2592,7 +2592,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.28
     },
     {
         "id": "p95",
@@ -2618,7 +2618,7 @@
         "specialist_tags": [
             "middle-order"
         ],
-        "hype_score": 0.0
+        "hype_score": 0.05
     },
     {
         "id": "p96",
@@ -2644,7 +2644,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.37
     },
     {
         "id": "p97",
@@ -2698,7 +2698,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.02
     },
     {
         "id": "p99",
@@ -2725,7 +2725,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.22
     },
     {
         "id": "p100",
@@ -2754,7 +2754,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.32
     },
     {
         "id": "p101",
@@ -2780,7 +2780,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.22
+        "hype_score": 0.36
     },
     {
         "id": "p102",
@@ -2809,7 +2809,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.38
     },
     {
         "id": "p103",
@@ -2838,7 +2838,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.32
     },
     {
         "id": "p104",
@@ -2867,7 +2867,7 @@
             "batting-allrounder",
             "pace-middle"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.41
     },
     {
         "id": "p105",
@@ -2896,7 +2896,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.15
+        "hype_score": 0.67
     },
     {
         "id": "p106",
@@ -2922,7 +2922,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.43
+        "hype_score": 0.48
     },
     {
         "id": "p107",
@@ -2948,7 +2948,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.54
+        "hype_score": 0.71
     },
     {
         "id": "p108",
@@ -2974,7 +2974,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.4
     },
     {
         "id": "p109",
@@ -3000,7 +3000,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.17
     },
     {
         "id": "p110",
@@ -3026,7 +3026,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.07
     },
     {
         "id": "p111",
@@ -3052,7 +3052,7 @@
         "specialist_tags": [
             "finger-spin"
         ],
-        "hype_score": 0.0
+        "hype_score": 0.37
     },
     {
         "id": "p112",
@@ -3078,7 +3078,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.42
     },
     {
         "id": "p113",
@@ -3104,7 +3104,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.0
+        "hype_score": 0.62
     },
     {
         "id": "p114",
@@ -3131,7 +3131,7 @@
             "swing",
             "pace-powerplay"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.38
     },
     {
         "id": "p115",
@@ -3157,7 +3157,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.1
+        "hype_score": 0.39
     },
     {
         "id": "p116",
@@ -3184,7 +3184,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.42
+        "hype_score": 0.3
     },
     {
         "id": "p117",
@@ -3211,7 +3211,7 @@
             "hard-hitting",
             "middle-order"
         ],
-        "hype_score": 0.27
+        "hype_score": 0.34
     },
     {
         "id": "p118",
@@ -3263,7 +3263,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.36
     },
     {
         "id": "p120",
@@ -3290,7 +3290,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.19
     },
     {
         "id": "p121",
@@ -3317,7 +3317,7 @@
             "finisher",
             "keeper-lower"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.66
     },
     {
         "id": "p122",
@@ -3344,7 +3344,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.37
     },
     {
         "id": "p123",
@@ -3433,7 +3433,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.42
     },
     {
         "id": "p126",
@@ -3462,7 +3462,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.18
     },
     {
         "id": "p127",
@@ -3491,7 +3491,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.48
     },
     {
         "id": "p128",
@@ -3520,7 +3520,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.35
     },
     {
         "id": "p129",
@@ -3546,7 +3546,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.39
     },
     {
         "id": "p130",
@@ -3572,7 +3572,7 @@
         "specialist_tags": [
             "finger-spin"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.3
     },
     {
         "id": "p131",
@@ -3598,7 +3598,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.45
     },
     {
         "id": "p132",
@@ -3624,7 +3624,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.16
+        "hype_score": 0.33
     },
     {
         "id": "p133",
@@ -3651,7 +3651,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.37
+        "hype_score": 0.51
     },
     {
         "id": "p134",
@@ -3679,7 +3679,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.34
     },
     {
         "id": "p135",
@@ -3705,7 +3705,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.35
     },
     {
         "id": "p136",
@@ -3731,7 +3731,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.0
+        "hype_score": 0.05
     },
     {
         "id": "p137",
@@ -3757,7 +3757,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.49
     },
     {
         "id": "p138",
@@ -3783,7 +3783,7 @@
         "specialist_tags": [
             "middle-order"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.36
     },
     {
         "id": "p139",
@@ -3809,7 +3809,7 @@
         "specialist_tags": [
             "middle-order"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.43
     },
     {
         "id": "p140",
@@ -3836,7 +3836,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.35
     },
     {
         "id": "p141",
@@ -3863,7 +3863,7 @@
             "finisher",
             "keeper-lower"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.35
     },
     {
         "id": "p142",
@@ -3890,7 +3890,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.2
     },
     {
         "id": "p143",
@@ -3916,7 +3916,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.39
     },
     {
         "id": "p144",
@@ -3945,7 +3945,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.4
     },
     {
         "id": "p145",
@@ -3974,7 +3974,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.46
     },
     {
         "id": "p146",
@@ -4004,7 +4004,7 @@
             "finisher",
             "swing"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.51
     },
     {
         "id": "p147",
@@ -4033,7 +4033,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.47
     },
     {
         "id": "p148",
@@ -4062,7 +4062,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.63
     },
     {
         "id": "p149",
@@ -4088,7 +4088,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.17
     },
     {
         "id": "p150",
@@ -4117,7 +4117,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.22
+        "hype_score": 0.29
     },
     {
         "id": "p151",
@@ -4146,7 +4146,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.04
+        "hype_score": 0.01
     },
     {
         "id": "p152",
@@ -4177,7 +4177,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.15
+        "hype_score": 0.33
     },
     {
         "id": "p153",
@@ -4203,7 +4203,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.06
     },
     {
         "id": "p154",
@@ -4229,7 +4229,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.0
     },
     {
         "id": "p155",
@@ -4255,7 +4255,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.05
     },
     {
         "id": "p156",
@@ -4281,7 +4281,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.02
+        "hype_score": 0.17
     },
     {
         "id": "p157",
@@ -4308,7 +4308,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.38
+        "hype_score": 0.3
     },
     {
         "id": "p158",
@@ -4334,7 +4334,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.43
+        "hype_score": 0.27
     },
     {
         "id": "p159",
@@ -4361,7 +4361,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.31
     },
     {
         "id": "p160",
@@ -4388,7 +4388,7 @@
             "hard-hitting",
             "middle-order"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.29
     },
     {
         "id": "p161",
@@ -4415,7 +4415,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.18
     },
     {
         "id": "p162",
@@ -4442,7 +4442,7 @@
             "top-order",
             "hard-hitting"
         ],
-        "hype_score": 0.53
+        "hype_score": 0.47
     },
     {
         "id": "p163",
@@ -4469,7 +4469,7 @@
             "finisher",
             "hard-hitting"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.34
     },
     {
         "id": "p164",
@@ -4495,7 +4495,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.16
+        "hype_score": 0.34
     },
     {
         "id": "p165",
@@ -4522,7 +4522,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.29
+        "hype_score": 0.23
     },
     {
         "id": "p166",
@@ -4549,7 +4549,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.42
     },
     {
         "id": "p167",
@@ -4578,7 +4578,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.29
+        "hype_score": 0.28
     },
     {
         "id": "p168",
@@ -4604,7 +4604,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.41
     },
     {
         "id": "p169",
@@ -4633,7 +4633,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.3
     },
     {
         "id": "p170",
@@ -4662,7 +4662,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.02
     },
     {
         "id": "p171",
@@ -4688,7 +4688,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.12
     },
     {
         "id": "p172",
@@ -4714,7 +4714,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.15
     },
     {
         "id": "p173",
@@ -4740,7 +4740,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.4
     },
     {
         "id": "p174",
@@ -4766,7 +4766,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.31
     },
     {
         "id": "p175",
@@ -4792,7 +4792,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.37
     },
     {
         "id": "p176",
@@ -4819,7 +4819,7 @@
             "finisher",
             "wrist-spin"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.34
     },
     {
         "id": "p177",
@@ -4845,7 +4845,7 @@
         "specialist_tags": [
             "finger-spin"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.31
     },
     {
         "id": "p178",
@@ -4871,7 +4871,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.36
     },
     {
         "id": "p179",
@@ -4899,7 +4899,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.32
     },
     {
         "id": "p180",
@@ -4925,7 +4925,7 @@
         "specialist_tags": [
             "middle-order"
         ],
-        "hype_score": 0.3
+        "hype_score": 0.32
     },
     {
         "id": "p181",
@@ -4952,7 +4952,7 @@
             "top-order",
             "hard-hitting"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.29
     },
     {
         "id": "p182",
@@ -4978,7 +4978,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.01
+        "hype_score": 0.43
     },
     {
         "id": "p183",
@@ -5004,7 +5004,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.03
     },
     {
         "id": "p184",
@@ -5031,7 +5031,7 @@
             "finisher",
             "keeper-lower"
         ],
-        "hype_score": 0.18
+        "hype_score": 0.39
     },
     {
         "id": "p185",
@@ -5058,7 +5058,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.26
+        "hype_score": 0.29
     },
     {
         "id": "p186",
@@ -5087,7 +5087,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.33
     },
     {
         "id": "p187",
@@ -5098,7 +5098,7 @@
         "is_youth": true,
         "age": 21,
         "nationality": "overseas",
-        "tier": 3,
+        "tier": 2,
         "brand_value": 0.55,
         "recent_form": 0.9,
         "ipl_experience": 2,
@@ -5116,7 +5116,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.41
     },
     {
         "id": "p188",
@@ -5127,7 +5127,7 @@
         "is_youth": false,
         "age": 29,
         "nationality": "overseas",
-        "tier": 4,
+        "tier": 3,
         "brand_value": 0.75,
         "recent_form": 0.75,
         "ipl_experience": 5,
@@ -5145,7 +5145,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.43
     },
     {
         "id": "p189",
@@ -5175,7 +5175,7 @@
             "bowling-allrounder",
             "wrist-spin"
         ],
-        "hype_score": 0.39
+        "hype_score": 0.5
     },
     {
         "id": "p190",
@@ -5204,7 +5204,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.12
     },
     {
         "id": "p191",
@@ -5231,7 +5231,7 @@
             "finisher",
             "hard-hitting"
         ],
-        "hype_score": 0.43
+        "hype_score": 0.46
     },
     {
         "id": "p192",
@@ -5260,7 +5260,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.35
     },
     {
         "id": "p193",
@@ -5286,7 +5286,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.31
     },
     {
         "id": "p194",
@@ -5312,7 +5312,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.18
     },
     {
         "id": "p195",
@@ -5339,7 +5339,7 @@
             "swing",
             "pace-powerplay"
         ],
-        "hype_score": 0.03
+        "hype_score": 0.47
     },
     {
         "id": "p196",
@@ -5365,7 +5365,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.13
     },
     {
         "id": "p197",
@@ -5391,7 +5391,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.79
     },
     {
         "id": "p198",
@@ -5417,7 +5417,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.44
     },
     {
         "id": "p199",
@@ -5444,7 +5444,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.35
+        "hype_score": 0.5
     },
     {
         "id": "p200",
@@ -5471,7 +5471,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.25
+        "hype_score": 0.37
     },
     {
         "id": "p201",
@@ -5497,7 +5497,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.09
+        "hype_score": 0.42
     },
     {
         "id": "p202",
@@ -5523,7 +5523,7 @@
         "specialist_tags": [
             "finisher"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.41
     },
     {
         "id": "p203",
@@ -5575,7 +5575,7 @@
         "specialist_tags": [
             "middle-order"
         ],
-        "hype_score": 0.05
+        "hype_score": 0.08
     },
     {
         "id": "p205",
@@ -5601,7 +5601,7 @@
         "specialist_tags": [
             "top-order"
         ],
-        "hype_score": 0.0
+        "hype_score": 0.4
     },
     {
         "id": "p206",
@@ -5628,7 +5628,7 @@
             "keeper-batter",
             "middle-order"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.18
     },
     {
         "id": "p207",
@@ -5655,7 +5655,7 @@
             "keeper-batter",
             "top-order"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.13
     },
     {
         "id": "p208",
@@ -5686,7 +5686,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.43
+        "hype_score": 0.31
     },
     {
         "id": "p209",
@@ -5715,7 +5715,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.49
     },
     {
         "id": "p210",
@@ -5742,7 +5742,7 @@
             "finger-spin",
             "top-order"
         ],
-        "hype_score": 0.21
+        "hype_score": 0.31
     },
     {
         "id": "p211",
@@ -5769,7 +5769,7 @@
             "top-order",
             "hard-hitting"
         ],
-        "hype_score": 0.2
+        "hype_score": 0.52
     },
     {
         "id": "p212",
@@ -5798,7 +5798,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.17
+        "hype_score": 0.49
     },
     {
         "id": "p213",
@@ -5827,7 +5827,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.0
+        "hype_score": 0.2
     },
     {
         "id": "p214",
@@ -5856,7 +5856,7 @@
             "batting-allrounder",
             "bowling-allrounder"
         ],
-        "hype_score": 0.18
+        "hype_score": 0.31
     },
     {
         "id": "p215",
@@ -5882,7 +5882,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.23
+        "hype_score": 0.4
     },
     {
         "id": "p216",
@@ -5908,7 +5908,7 @@
         "specialist_tags": [
             "pace-powerplay"
         ],
-        "hype_score": 0.07
+        "hype_score": 0.43
     },
     {
         "id": "p217",
@@ -5934,7 +5934,7 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.08
+        "hype_score": 0.05
     },
     {
         "id": "p218",
@@ -5960,7 +5960,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.24
+        "hype_score": 0.66
     },
     {
         "id": "p219",
@@ -5987,7 +5987,7 @@
             "swing",
             "pace-death"
         ],
-        "hype_score": 0.4
+        "hype_score": 0.46
     },
     {
         "id": "p220",
@@ -6013,7 +6013,7 @@
         "specialist_tags": [
             "wrist-spin"
         ],
-        "hype_score": 0.19
+        "hype_score": 0.47
     },
     {
         "id": "p221",
@@ -6039,6 +6039,6 @@
         "specialist_tags": [
             "pace-middle"
         ],
-        "hype_score": 0.06
+        "hype_score": 0.08
     }
 ]
