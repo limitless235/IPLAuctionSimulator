@@ -108,7 +108,8 @@ class AuctionOrchestrator:
                     self.snapshot_cb(force=True)
                 if not test_mode:
                     speed = self.get_speed_cb() if self.get_speed_cb else "normal"
-                    time.sleep(0.2 if speed == "normal" else 0.05)
+                    # Enforce a mandatory 0.1s "Memory Breather" even in fast mode
+                    time.sleep(0.2 if speed == "normal" else 0.1)
                 continue
 
             if len(active) == 1 and state.highest_bidder == active[0]:
@@ -192,7 +193,8 @@ class AuctionOrchestrator:
                     self.snapshot_cb(force=True)
                 if not test_mode:
                     speed = self.get_speed_cb() if self.get_speed_cb else "normal"
-                    time.sleep(0.5 if speed == "normal" else 0.1)
+                    # Enforce a mandatory 0.2s "Memory Breather" even in fast mode
+                    time.sleep(0.5 if speed == "normal" else 0.2)
                 continue
 
             # Full round-robin through all active bidders

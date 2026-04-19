@@ -61,3 +61,4 @@ coverage/
 .coverage
 htmlcov/
 
+SYSTEM_ARCHITECTURE.md

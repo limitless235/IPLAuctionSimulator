@@ -52,6 +52,8 @@ _main_loop = None
 _auction_state = None
 _stop_event = threading.Event()
 last_snapshot_time = 0
+db_save_counter = 0
+last_bid_broadcast_time = 0
 db = DatabaseManager()
 
 ROLE_MAP = {"batter": "BAT", "bowler": "BOWL", "all_rounder": "ALL", "wicket_keeper": "WK"}
@@ -83,21 +85,46 @@ async def on_startup():
 
 def sync_broadcast(payload: dict):
     from datetime import datetime
+    global db_save_counter, last_bid_broadcast_time
+    
+    # 1. Update Live Feed (Internal State)
     if payload.get("type") in ("bid_placed", "player_sold", "player_unsold", "player_retained"):
-        auction_state["feed"].insert(0, {
-            "time": datetime.now().strftime("%I:%M %p"),
-            "text": payload.get("text", ""),
-            "type": payload.get("event_type", "info")
-        })
+        # Throttle bid feed entries in "Fast" mode to prevent RAM bloat
+        is_fast = auction_state.get("speed") == "fast"
+        now = time.time()
+        
+        should_log = True
+        if is_fast and payload.get("type") == "bid_placed":
+            if now - last_bid_broadcast_time < 0.2: # Max 5 bids per sec in feed
+                should_log = False
+        
+        if should_log:
+            auction_state["feed"].insert(0, {
+                "time": datetime.now().strftime("%I:%M %p"),
+                "text": payload.get("text", ""),
+                "type": payload.get("event_type", "info")
+            })
+            if payload.get("type") == "bid_placed":
+                last_bid_broadcast_time = now
+
         # Memory Stabilization: Keep only the last 100 feed items to prevent RAM bloat
         if len(auction_state["feed"]) > 100:
             auction_state["feed"] = auction_state["feed"][:100]
             
-        # Persistence: Save state after every SOLD event
+        # 2. Persistence: Save state every 5 SOLD events in a background thread
         if payload.get("type") == "player_sold" and _auction_state:
-            db.save_state(auction_state["session_name"], _auction_state)
+            db_save_counter += 1
+            if db_save_counter >= 5:
+                db_save_counter = 0
+                threading.Thread(target=db.save_state, args=(auction_state["session_name"], _auction_state), daemon=True).start()
     
+    # 3. WebSocket Broadcast
     if _main_loop and _main_loop.is_running():
+        # Throttle bid broadcasts in fast mode
+        if auction_state.get("speed") == "fast" and payload.get("type") == "bid_placed":
+            if time.time() - last_bid_broadcast_time < 0.1: # Max 10 bid updates per sec
+                return
+        
         asyncio.run_coroutine_threadsafe(broadcast(payload), _main_loop)
     else:
         asyncio.run(broadcast(payload))
