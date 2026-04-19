@@ -53,7 +53,7 @@ class AuctionOrchestrator:
     def _run_bidding_loop(self, test_mode: bool = False):
         """Core bidding loop — shared between main auction and accelerated phase."""
         if self.snapshot_cb:
-            self.snapshot_cb()
+            self.snapshot_cb(force=True)
 
         while True:
             if self.stop_event and self.stop_event.is_set():
@@ -73,7 +73,7 @@ class AuctionOrchestrator:
             if not state.current_player:
                 self.engine.next_player()
                 if self.snapshot_cb:
-                    self.snapshot_cb()
+                    self.snapshot_cb(force=True)
                 continue
 
             player = state.current_player
@@ -105,7 +105,7 @@ class AuctionOrchestrator:
                     self.engine.state.unsold_players + self.engine.state.sold_players
                 )
                 if self.snapshot_cb:
-                    self.snapshot_cb()
+                    self.snapshot_cb(force=True)
                 if not test_mode:
                     speed = self.get_speed_cb() if self.get_speed_cb else "normal"
                     time.sleep(0.2 if speed == "normal" else 0.05)
@@ -131,7 +131,7 @@ class AuctionOrchestrator:
                             "event_type": "info"
                         })
                     if self.snapshot_cb:
-                        self.snapshot_cb()
+                        self.snapshot_cb(force=True)
                     if not test_mode and hammer_delay > 0:
                         time.sleep(hammer_delay)
                     continue  # Loop back — give teams a chance to jump in
@@ -148,7 +148,7 @@ class AuctionOrchestrator:
                             "event_type": "info"
                         })
                     if self.snapshot_cb:
-                        self.snapshot_cb()
+                        self.snapshot_cb(force=True)
                     if not test_mode and hammer_delay > 0:
                         time.sleep(hammer_delay)
                     continue  # One more chance
@@ -189,7 +189,7 @@ class AuctionOrchestrator:
                 # --- DESPERATION CRISIS SCAN ---
                 self._scan_for_desperation_crisis()
                 if self.snapshot_cb:
-                    self.snapshot_cb()
+                    self.snapshot_cb(force=True)
                 if not test_mode:
                     speed = self.get_speed_cb() if self.get_speed_cb else "normal"
                     time.sleep(0.5 if speed == "normal" else 0.1)
@@ -368,7 +368,7 @@ class AuctionOrchestrator:
         state.current_player = None
 
         if self.snapshot_cb:
-            self.snapshot_cb()
+            self.snapshot_cb(force=True)
 
         # Run the bidding loop again for the accelerated players
         self._run_bidding_loop(test_mode)

@@ -82,12 +82,12 @@ def sync_broadcast(payload: dict):
     else:
         asyncio.run(broadcast(payload))
 
-def send_state_snapshot():
+def send_state_snapshot(force=False):
     """Forces the frontend to do a hard refresh of the state. 
-    Throttled to 1 per 500ms to prevent 60GB RAM spikes in fast mode."""
+    Throttled to 1 per 500ms unless 'force' is True."""
     global last_snapshot_time
     now = time.time()
-    if now - last_snapshot_time < 0.5:
+    if not force and (now - last_snapshot_time < 0.5):
         return
         
     last_snapshot_time = now
